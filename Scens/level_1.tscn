@@ -1,14 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://eq3roeeihepq"]
+[gd_scene load_steps=7 format=3 uid="uid://eq3roeeihepq"]
 
-[ext_resource type="Texture2D" uid="uid://jvqtbcb0nm0b" path="res://tile/2 Background/Day/1.png" id="1_jk42d"]
 [ext_resource type="Texture2D" uid="uid://cdohq75qpxqan" path="res://Super Grotto Escape/Environment/tileset/tileset.png" id="1_vlr0h"]
-[ext_resource type="Texture2D" uid="uid://b6jqxpm58w3fv" path="res://tile/2 Background/Day/2.png" id="2_oanmv"]
 [ext_resource type="PackedScene" uid="uid://csiad1xnelatm" path="res://Scens/player.tscn" id="2_wxgfh"]
-[ext_resource type="Texture2D" uid="uid://be21oxcv4488u" path="res://tile/2 Background/Day/3.png" id="3_u5bo4"]
-[ext_resource type="Texture2D" uid="uid://cbyon5grcj81n" path="res://tile/2 Background/Day/4.png" id="4_40xyo"]
-[ext_resource type="Texture2D" uid="uid://cw7ihoo12ticd" path="res://tile/2 Background/Day/5.png" id="5_5uchn"]
-[ext_resource type="Texture2D" uid="uid://bljgxi87ucsvd" path="res://tile/1 Tiles/Tileset.png" id="7_70k3q"]
-[ext_resource type="Texture2D" uid="uid://xo40f8851j3m" path="res://tile/1 Tiles/Tile_02.png" id="8_qa7wf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v7cy7"]
 texture = ExtResource("1_vlr0h")
@@ -177,7 +170,6 @@ texture = ExtResource("1_vlr0h")
 20:14/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t0upt"]
-texture = ExtResource("7_70k3q")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -444,7 +436,6 @@ texture = ExtResource("7_70k3q")
 15:15/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k3gst"]
-texture = ExtResource("8_qa7wf")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
@@ -460,23 +451,18 @@ sources/2 = SubResource("TileSetAtlasSource_k3gst")
 
 [node name="1" type="Sprite2D" parent="."]
 position = Vector2(290, 165)
-texture = ExtResource("1_jk42d")
 
 [node name="2" type="Sprite2D" parent="."]
 position = Vector2(290, 166)
-texture = ExtResource("2_oanmv")
 
 [node name="3" type="Sprite2D" parent="."]
 position = Vector2(291, 165)
-texture = ExtResource("3_u5bo4")
 
 [node name="4" type="Sprite2D" parent="."]
 position = Vector2(291, 165)
-texture = ExtResource("4_40xyo")
 
 [node name="5" type="Sprite2D" parent="."]
 position = Vector2(291, 164)
-texture = ExtResource("5_5uchn")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_2bpv3")
