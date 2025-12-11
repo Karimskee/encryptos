@@ -463,6 +463,7 @@ sources/3 = SubResource("TileSetAtlasSource_8fnge")
 size = Vector2(63, 56)
 
 [node name="level1" type="Node2D"]
+position = Vector2(-32, 4)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(534, 188)
