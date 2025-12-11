@@ -1,0 +1,155 @@
+[gd_scene load_steps=7 format=3 uid="uid://dygyy2ftidkku"]
+
+[ext_resource type="Script" uid="uid://bh0ycvdkmq3ux" path="res://Scripts/level2.gd" id="1_qhn73"]
+[ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="2_yvbv6"]
+[ext_resource type="Texture2D" uid="uid://cjtbgtqer7osx" path="res://tile/R.png" id="3_k5igv"]
+[ext_resource type="Texture2D" uid="uid://ct4hvtdxevnot" path="res://tile/391324.png" id="4_oe2de"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvbv6"]
+bg_color = Color(0.056347445, 0.17056209, 0.09048296, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boo65"]
+bg_color = Color(0.14275816, 0, 0.009600752, 1)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_qhn73")
+metadata/_edit_horizontal_guides_ = [505.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -92.0
+offset_top = -35.0
+offset_right = 1196.0
+offset_bottom = 704.0
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 6.0
+offset_right = 1153.0
+offset_bottom = 652.0
+
+[node name="LabelResets" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 1057.0
+offset_top = 589.0
+offset_right = 1097.0
+offset_bottom = 636.0
+theme_override_colors/font_color = Color(0.14117648, 0.53333336, 1, 1)
+theme_override_fonts/font = ExtResource("2_yvbv6")
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelAttempts" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 1091.0
+offset_top = 585.0
+offset_right = 1152.0
+offset_bottom = 642.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_yvbv6")
+theme_override_font_sizes/font_size = 30
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelTitle" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 52.0
+offset_right = 1052.0
+offset_bottom = 141.0
+theme_override_colors/font_color = Color(5.631298e-06, 0.6659076, 5.7756904e-07, 1)
+theme_override_fonts/font = ExtResource("2_yvbv6")
+theme_override_font_sizes/font_size = 73
+text = "Crack the Folder Encryption"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelCipherName" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 131.0
+offset_right = 896.0
+offset_bottom = 174.0
+theme_override_colors/font_color = Color(0, 0.6666667, 0, 1)
+theme_override_fonts/font = ExtResource("2_yvbv6")
+theme_override_font_sizes/font_size = 35
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LabelCipher" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 214.0
+offset_right = 835.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("2_yvbv6")
+theme_override_font_sizes/font_size = 31
+text = "Ciphertext: escape through the tunnel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelKey" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 268.0
+offset_right = 794.0
+offset_bottom = 296.0
+theme_override_fonts/font = ExtResource("2_yvbv6")
+theme_override_font_sizes/font_size = 30
+text = "Key: 125346646631311545456454654"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="InputAnswer" type="LineEdit" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 422.0
+offset_right = 716.0
+offset_bottom = 453.0
+theme_override_colors/font_color = Color(0, 0.6666667, 0, 1)
+theme_override_fonts/font = ExtResource("2_yvbv6")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "TYPE THE DECRYPTED MESSAGE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 469.0
+offset_right = 922.0
+offset_bottom = 515.0
+alignment = 1
+
+[node name="BtnSubmit" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.6666667, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.6666667, 0, 1)
+theme_override_fonts/font = ExtResource("2_yvbv6")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_yvbv6")
+text = "   Submit   "
+
+[node name="BtnReset" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72994626, 0, 0.15458107, 1)
+theme_override_fonts/font = ExtResource("2_yvbv6")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_boo65")
+text = "   Reset   "
+
+[node name="R" type="Sprite2D" parent="."]
+position = Vector2(1122.0001, 591)
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("3_k5igv")
+
+[node name="391324" type="Sprite2D" parent="."]
+position = Vector2(1074, 590)
+scale = Vector2(0.055, 0.055)
+texture = ExtResource("4_oe2de")

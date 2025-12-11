@@ -22,6 +22,6 @@ func _process(delta: float) -> void:
 	if entered == true:
 		if Input.is_action_just_pressed("Enter"):
 			print("Enter pressed! Changing scene...")
-			get_tree().change_scene_to_file("res://Scens/player.tscn")  
+			get_tree().change_scene_to_file("res://Scens/level2.tscn")  
 			
 			
