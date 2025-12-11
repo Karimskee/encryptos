@@ -24,7 +24,7 @@ func test(cipher: Script, plain_text: String, key: Variant) -> void:
 	
 	# Encrypt
 	var cipher_text = cipher.encrypt(plain_text, key)
-	print("Encrypted:  ", cipher_text) 
+	print("Encrypted:  ", cipher_text)
 	
 	# Decypt
 	var decrypted_text = cipher.decrypt(cipher_text, key)
