@@ -1,12 +1,15 @@
 extends Node
 
 
+# Global variables
 var plain_text = "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 1234567890 !@#$%^&*()_+-=~,./;:'\"[]{}<>"
 var key = 3
 
 
 func _ready():
 	print("[TESTING CIPHERS]\n")
+	
+	# ADD NEW CIPHERS HERE
 	var ciphers = [Caesar]
 	
 	for cipher in ciphers:
