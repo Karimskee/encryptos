@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://eq3roeeihepq"]
+[gd_scene load_steps=9 format=3 uid="uid://eq3roeeihepq"]
 
 [ext_resource type="Texture2D" uid="uid://cdohq75qpxqan" path="res://Super Grotto Escape/Environment/tileset/tileset.png" id="1_vlr0h"]
 [ext_resource type="PackedScene" uid="uid://csiad1xnelatm" path="res://Scens/player.tscn" id="2_wxgfh"]
+[ext_resource type="Script" uid="uid://dotyu7e2bdmw8" path="res://Scripts/ciphers/caesar.gd" id="3_wxgfh"]
+[ext_resource type="Script" uid="uid://p6ap57wpbdo3" path="res://Scripts/ciphers/test_ciphers.gd" id="4_v7cy7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v7cy7"]
 texture = ExtResource("1_vlr0h")
@@ -479,3 +481,11 @@ limit_left = 0
 limit_top = 10
 limit_right = 580
 limit_bottom = 330
+
+[node name="Ciphers" type="Node" parent="."]
+
+[node name="Caesar" type="Node" parent="Ciphers"]
+script = ExtResource("3_wxgfh")
+
+[node name="Tester" type="Node" parent="Ciphers"]
+script = ExtResource("4_v7cy7")
