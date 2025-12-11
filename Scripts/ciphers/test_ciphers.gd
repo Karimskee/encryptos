@@ -6,34 +6,29 @@ var key = 3
 
 
 func _ready():
-	var ciphers = [caesar]
+	print("[TESTING CIPHERS]\n")
+	var ciphers = [Caesar]
 	
 	for cipher in ciphers:
 		test(cipher, plain_text, key)
 
 
-func test(function: Callable, plain_text: String, key: int):
-	var decrypted_text = function.call(plain_text, key)
-	
-	if (plain_text == decrypted_text):
-		print("[SUCCESS] %s cipher is working properly." % function.get_method())
-	else:
-		print("[FAIL] %s cipher is not working properly." % function.get_method())
-	print()
-
-
-func caesar(plain_text: String, key: int):
+func test(cipher: Script, plain_text: String, key: Variant) -> void:
 	# For debugging
-	print("Caesar cipher")
+	print(cipher.get_global_name() + " cipher")
 	print("Key: ", key)
 	print("Plain Text: ", plain_text)
 	
 	# Encrypt
-	var cipher_text = Caesar.encrypt(plain_text, key)
+	var cipher_text = cipher.encrypt(plain_text, key)
 	print("Encrypted:  ", cipher_text) 
 	
 	# Decypt
-	var decrypted_text = Caesar.decrypt(cipher_text, key)
+	var decrypted_text = cipher.decrypt(cipher_text, key)
 	print("Decrypted:  ", decrypted_text)
 	
-	return decrypted_text
+	if (plain_text == decrypted_text):
+		print("[SUCCESS] %s cipher is working properly." % cipher.get_global_name())
+	else:
+		print("[FAIL] %s cipher is not working properly." % cipher.get_global_name())
+	print()
