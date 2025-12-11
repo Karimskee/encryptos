@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="6_oanmv"]
 [ext_resource type="Script" path="res://Scripts/strat_game.gd" id="11_u5bo4"]
 [ext_resource type="Script" path="res://Scens/traning.gd" id="12_40xyo"]
+[ext_resource type="Script" uid="uid://dotyu7e2bdmw8" path="res://Scripts/ciphers/caesar.gd" id="3_wxgfh"]
+[ext_resource type="Script" uid="uid://p6ap57wpbdo3" path="res://Scripts/ciphers/test_ciphers.gd" id="4_v7cy7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5bo4"]
 texture = ExtResource("2_8fnge")
@@ -612,3 +614,11 @@ shape = SubResource("RectangleShape2D_5uchn")
 
 [connection signal="body_entered" from="strat_game" to="strat_game" method="_on_body_entered"]
 [connection signal="body_entered" from="Traning" to="Traning" method="_on_body_entered"]
+
+[node name="Ciphers" type="Node" parent="."]
+
+[node name="Caesar" type="Node" parent="Ciphers"]
+script = ExtResource("3_wxgfh")
+
+[node name="Tester" type="Node" parent="Ciphers"]
+script = ExtResource("4_v7cy7")
