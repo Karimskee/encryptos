@@ -622,3 +622,5 @@ script = ExtResource("3_wxgfh")
 
 [node name="Tester" type="Node" parent="Ciphers"]
 script = ExtResource("4_v7cy7")
+
+[node name="Monoalphabetic" type="Node" parent="Ciphers"]
