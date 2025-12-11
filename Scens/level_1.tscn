@@ -486,7 +486,7 @@ limit_right = 580
 limit_bottom = 330
 
 [node name="killzone" parent="." instance=ExtResource("3_wxgfh")]
-position = Vector2(269, 338)
+position = Vector2(269, 368)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(535, 188)
