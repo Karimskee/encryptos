@@ -34,5 +34,5 @@ func test(cipher: Script, plain_text: String, key: Variant) -> void:
 	if (plain_text == decrypted_text):
 		print("[SUCCESS] %s cipher is working properly." % cipher.get_global_name())
 	else:
-		printerr("[FAIL] %s cipher is not working properly." % cipher.get_global_name())
+		print("[FAIL] %s cipher is not working properly." % cipher.get_global_name())
 	print()
