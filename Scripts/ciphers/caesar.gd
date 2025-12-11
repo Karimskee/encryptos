@@ -2,7 +2,7 @@ class_name Caesar
 extends Node
 
 # 🔒 ENCRYPTION
-static func encrypt(key: int, text: String) -> String:
+static func encrypt(text: String, key: int) -> String:
 	# Convert to raw bytes for speed (avoiding String concatenation)
 	var buffer: PackedByteArray = text.to_utf8_buffer()
 	var size: int = buffer.size()
@@ -26,7 +26,7 @@ static func encrypt(key: int, text: String) -> String:
 	return buffer.get_string_from_utf8()
 
 # 🔓 DECRYPTION
-static func decrypt(key: int, text: String) -> String:
+static func decrypt(text: String, key: int) -> String:
 	var buffer: PackedByteArray = text.to_utf8_buffer()
 	var size: int = buffer.size()
 	
