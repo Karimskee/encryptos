@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://csiad1xnelatm"]
+[gd_scene load_steps=36 format=3 uid="uid://csiad1xnelatm"]
 
 [ext_resource type="Script" uid="uid://cr5mpq3c5f0cf" path="res://Scripts/player.gd" id="1_4tq17"]
 [ext_resource type="Texture2D" uid="uid://bfgbnm0nuorcj" path="res://assets/Character/Adventure_Character_Simple.png" id="2_y1jf2"]
@@ -22,6 +22,22 @@ region = Rect2(144, 288, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_inxhq"]
 atlas = ExtResource("2_y1jf2")
 region = Rect2(192, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1jf2"]
+atlas = ExtResource("2_y1jf2")
+region = Rect2(0, 720, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8xd2"]
+atlas = ExtResource("2_y1jf2")
+region = Rect2(48, 720, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5vcc"]
+atlas = ExtResource("2_y1jf2")
+region = Rect2(96, 720, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7mgd"]
+atlas = ExtResource("2_y1jf2")
+region = Rect2(144, 720, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ft64u"]
 atlas = ExtResource("2_y1jf2")
@@ -132,6 +148,23 @@ animations = [{
 "loop": false,
 "name": &"Attack",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1jf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8xd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5vcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7mgd")
+}],
+"loop": false,
+"name": &"Dash",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -300,8 +333,10 @@ jump_force = 350.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v5l7k")
-animation = &"Enter"
+animation = &"Dash"
 autoplay = "Idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
