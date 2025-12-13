@@ -450,7 +450,6 @@ sources/1 = SubResource("TileSetAtlasSource_t0upt")
 sources/2 = SubResource("TileSetAtlasSource_k3gst")
 
 [node name="level1" type="Node2D"]
-position = Vector2(-32, 4)
 
 [node name="1" type="Sprite2D" parent="."]
 position = Vector2(290, 165)
@@ -482,9 +481,6 @@ limit_left = 0
 limit_top = 10
 limit_right = 580
 limit_bottom = 330
-
-[node name="killzone" parent="." instance=ExtResource("3_wxgfh")]
-position = Vector2(269, 368)
 
 [node name="Ciphers" type="Node" parent="."]
 
