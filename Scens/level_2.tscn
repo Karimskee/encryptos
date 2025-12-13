@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://da373y06mqrxk"]
+[gd_scene load_steps=19 format=3 uid="uid://da373y06mqrxk"]
 
 [ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="1_of1ea"]
 [ext_resource type="Texture2D" uid="uid://fuasmlsgbiqe" path="res://assets/image.png" id="2_44npc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="8_mr7xy"]
 [ext_resource type="PackedScene" uid="uid://yulrv74t667p" path="res://Scens/killzone.tscn" id="9_pudcb"]
 [ext_resource type="Script" uid="uid://bb0bjqkvvkiqa" path="res://Scripts/area_2d.gd" id="10_3f6ob"]
+[ext_resource type="PackedScene" uid="uid://sm7eppna178c" path="res://Scens/enemy.tscn" id="11_44npc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_alhpo"]
 texture = ExtResource("4_5kok1")
@@ -512,6 +513,18 @@ offset_bottom = 1068.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="Enemy" parent="." instance=ExtResource("11_44npc")]
+position = Vector2(316, 69)
+scale = Vector2(0.665, 0.665)
+
+[node name="Enemy2" parent="." instance=ExtResource("11_44npc")]
+position = Vector2(457, 199)
+scale = Vector2(0.665, 0.665)
+
+[node name="Enemy3" parent="." instance=ExtResource("11_44npc")]
+position = Vector2(650, 167)
+scale = Vector2(0.665, 0.665)
+
 [node name="Label" type="Label" parent="."]
 offset_left = 180.0
 offset_top = 24.0
@@ -533,6 +546,7 @@ flip_h = true
 position = Vector2(96, -82)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+visible = false
 zoom = Vector2(4.985, 4.985)
 limit_left = 0
 limit_top = -15
