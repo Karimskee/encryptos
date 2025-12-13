@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://da373y06mqrxk"]
+[gd_scene load_steps=18 format=3 uid="uid://da373y06mqrxk"]
 
+[ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="1_alhpo"]
 [ext_resource type="Texture2D" uid="uid://fuasmlsgbiqe" path="res://assets/image.png" id="1_ho0ui"]
 [ext_resource type="Script" uid="uid://bb0bjqkvvkiqa" path="res://Scripts/area_2d.gd" id="8_olw3j"]
 [ext_resource type="PackedScene" uid="uid://csiad1xnelatm" path="res://Scens/player.tscn" id="401_6wl55"]
@@ -504,11 +505,35 @@ size = Vector2(25.25, 23)
 [node name="Node2D" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 10.0
+offset_left = -4.0
 offset_top = -78.0
 offset_right = 1766.0
 offset_bottom = 1068.0
 color = Color(0, 0, 0, 1)
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 67.0
+offset_top = 179.99998
+offset_right = 216.0
+offset_bottom = 267.0
+scale = Vector2(0.56, 0.56)
+theme_override_fonts/font = ExtResource("1_alhpo")
+theme_override_font_sizes/font_size = 16
+text = "Press D to Move right
+Press a to Move left
+Press space to  jump
+
+"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 180.0
+offset_top = 24.0
+offset_right = 316.0
+offset_bottom = 39.0
+scale = Vector2(0.56, 0.56)
+theme_override_fonts/font = ExtResource("1_alhpo")
+theme_override_font_sizes/font_size = 16
+text = "Press E to continue"
 
 [node name="Image" type="Sprite2D" parent="."]
 position = Vector2(175, 38.999996)
