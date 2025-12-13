@@ -156,3 +156,52 @@ func _update_animation() -> void:
 	else:
 		if sprite.animation != "Idle":
 			sprite.play("Idle")
+
+# دالة تشغيل انيميشن الدخول
+func play_enter_animation():
+	print("play_enter_animation called!")
+	
+	# لو مش على الأرض، استنى لحد ما يوصل
+	if not is_on_floor():
+		print("Player not on floor, waiting...")
+		await get_tree().create_timer(0.1).timeout
+		if not is_on_floor():
+			print("Still not on floor, canceling animation")
+			return
+	
+	is_playing_enter_animation = true
+	enter_animation_timer = enter_animation_duration
+	control_enabled = false
+	
+	# نوقف كل الحركة
+	velocity = Vector2.ZERO
+	
+	if sprite.sprite_frames.has_animation("Enter"):
+		sprite.play("Enter")
+		print("Playing 'Enter' animation for ", enter_animation_duration, " seconds")
+	else:
+		print("'Enter' animation not found, playing visual effect")
+		sprite.play("Idle")
+		_do_scale_effect()
+
+
+func _do_scale_effect():
+	var tween = create_tween()
+	# كبّر وخفت الشفافية
+	tween.set_parallel(true)
+	tween.tween_property(sprite, "scale", Vector2(1.5, 1.5), 0.5)
+	tween.tween_property(sprite, "modulate:a", 0.3, 0.5)
+	# ارجع للطبيعي
+	tween.chain()
+	tween.set_parallel(true)
+	tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.5)
+	tween.tween_property(sprite, "modulate:a", 1.0, 0.5)
+	# كرر التأثير مرة تانية
+	tween.chain()
+	tween.set_parallel(true)
+	tween.tween_property(sprite, "scale", Vector2(1.3, 1.3), 0.4)
+	tween.tween_property(sprite, "modulate", Color(1, 1, 0, 1), 0.4)
+	tween.chain()
+	tween.set_parallel(true)
+	tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.4)
+	tween.tween_property(sprite, "modulate", Color(1, 1, 1, 1), 0.4)
