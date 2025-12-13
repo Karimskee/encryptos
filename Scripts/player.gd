@@ -236,5 +236,3 @@ func _do_scale_effect():
 	tween.set_parallel(true)
 	tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.4)
 	tween.tween_property(sprite, "modulate", Color(1, 1, 1, 1), 0.4)
-	
-	#
