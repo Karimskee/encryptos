@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://eq3roeeihepq"]
+[gd_scene load_steps=13 format=3 uid="uid://eq3roeeihepq"]
 
+[ext_resource type="Texture2D" uid="uid://bf22lund4xmok" path="res://assets/background/Postapocalypce3/Pale/postapocalypse3.png" id="1_8fnge"]
 [ext_resource type="Texture2D" uid="uid://cdohq75qpxqan" path="res://Super Grotto Escape/Environment/tileset/tileset.png" id="1_vlr0h"]
 [ext_resource type="Texture2D" uid="uid://dxb2qekr6quh2" path="res://Super Grotto Escape/Props/console.png" id="2_2bpv3"]
 [ext_resource type="PackedScene" uid="uid://csiad1xnelatm" path="res://Scens/player.tscn" id="2_wxgfh"]
@@ -464,6 +465,11 @@ size = Vector2(63, 56)
 
 [node name="level1" type="Node2D"]
 position = Vector2(-32, 4)
+
+[node name="Postapocalypse3" type="Sprite2D" parent="."]
+position = Vector2(322.00003, 164)
+scale = Vector2(0.4140625, 0.3921296)
+texture = ExtResource("1_8fnge")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(534, 188)

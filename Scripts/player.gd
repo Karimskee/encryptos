@@ -34,7 +34,7 @@ var enter_animation_timer: float = 0.0
 
 
 func respown():
-	self.global_position = Vector2(49, 223)
+	self.global_position = Vector2(106, 213)
 
 
 func _ready() -> void:
