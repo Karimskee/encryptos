@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://da373y06mqrxk"]
+[gd_scene load_steps=22 format=3 uid="uid://da373y06mqrxk"]
 
 [ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="1_of1ea"]
 [ext_resource type="Texture2D" uid="uid://fuasmlsgbiqe" path="res://assets/image.png" id="2_44npc"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="8_mr7xy"]
 [ext_resource type="PackedScene" uid="uid://yulrv74t667p" path="res://Scens/killzone.tscn" id="9_pudcb"]
 [ext_resource type="Script" uid="uid://bb0bjqkvvkiqa" path="res://Scripts/area_2d.gd" id="10_3f6ob"]
+[ext_resource type="PackedScene" uid="uid://sm7eppna178c" path="res://Scens/enemy.tscn" id="11_44npc"]
+[ext_resource type="PackedScene" uid="uid://d2fb02dwnwjwk" path="res://Scens/enemy_2.tscn" id="12_x1vh1"]
+[ext_resource type="PackedScene" uid="uid://dj6vq5cfj3157" path="res://Scens/enemy_3.tscn" id="13_5kok1"]
+[ext_resource type="PackedScene" uid="uid://clg0hi0mrcxnb" path="res://Scens/health_ui.tscn" id="14_hx56y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_alhpo"]
 texture = ExtResource("4_5kok1")
@@ -512,6 +516,14 @@ offset_bottom = 1068.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="Enemy" parent="." instance=ExtResource("11_44npc")]
+position = Vector2(316, 69)
+scale = Vector2(0.665, 0.665)
+
+[node name="Enemy3" parent="." instance=ExtResource("11_44npc")]
+position = Vector2(650, 167)
+scale = Vector2(0.665, 0.665)
+
 [node name="Label" type="Label" parent="."]
 offset_left = 180.0
 offset_top = 24.0
@@ -533,6 +545,7 @@ flip_h = true
 position = Vector2(96, -82)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+visible = false
 zoom = Vector2(4.985, 4.985)
 limit_left = 0
 limit_top = -15
@@ -565,6 +578,17 @@ script = ExtResource("10_3f6ob")
 position = Vector2(-356.625, -150)
 shape = SubResource("RectangleShape2D_ho0ui")
 debug_color = Color(0.7029309, 0.49088812, 0, 0.41960785)
+
+[node name="Enemy-2" parent="." instance=ExtResource("12_x1vh1")]
+position = Vector2(233, 208)
+
+[node name="enemy_3" parent="." instance=ExtResource("13_5kok1")]
+position = Vector2(471, 194)
+damage_timing = 0.2
+
+[node name="Health UI" parent="." instance=ExtResource("14_hx56y")]
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
