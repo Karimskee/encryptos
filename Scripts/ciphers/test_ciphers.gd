@@ -14,7 +14,7 @@ func _ready():
 	var ciphers = [Caesar]
 	
 	for cipher in ciphers:
-		test(cipher, plain_text, key_int)
+		test(cipher, plain_text)
 
 
 func test(cipher: Script, plain_text: String, key: Variant) -> void:
@@ -24,11 +24,11 @@ func test(cipher: Script, plain_text: String, key: Variant) -> void:
 	print("Plain Text: ", plain_text)
 	
 	# Encrypt
-	var cipher_text = cipher.encrypt(key, plain_text)
+	var cipher_text = cipher.encrypt(plain_text, key)
 	print("Encrypted:  ", cipher_text)
 	
 	# Decypt
-	var decrypted_text = cipher.decrypt(key, cipher_text)
+	var decrypted_text = cipher.decrypt(cipher_text, key)
 	print("Decrypted:  ", decrypted_text)
 	
 	if (plain_text == decrypted_text):
