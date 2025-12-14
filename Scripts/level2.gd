@@ -336,19 +336,28 @@ func _otp_encrypt(text: String, pad: PackedInt32Array) -> String:
 func _rail_fence_encrypt(text: String, depth: int) -> String:
 	if depth <= 1:
 		return text
+	
 	var rails := []
 	for i in range(depth):
 		rails.append("")
+		
 	var rail = 0
-	var dir = 1
+	var dir = 1 # 1 for down, -1 for up
+	
 	for c in text:
-		rails[rail] += c
-		rail += dir
+		# Check boundary *before* adding the character and update direction
+		# If we hit the top rail (index 0) OR the bottom rail (index depth - 1)
 		if rail == 0:
-			dir = 1
-		elif rail == depth:
-			rail = depth - 2
-			dir = -1
+			dir = 1  # Must go down
+		elif rail == depth - 1:
+			dir = -1 # Must go up
+			
+		# Place the character on the rail
+		rails[rail] += c
+		
+		# Move to the next rail
+		rail += dir
+		
 	var out := ""
 	for r in rails:
 		out += r
