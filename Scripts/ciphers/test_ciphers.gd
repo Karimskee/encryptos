@@ -17,7 +17,8 @@ func _ready():
 	var ciphers = [
 		Caesar,
 		Monoalphabetic,
-		OneTimePad
+		OneTimePad,
+		Polyalphabetic
 	]
 	
 	for cipher in ciphers:
