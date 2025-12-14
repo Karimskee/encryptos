@@ -163,3 +163,41 @@ static func _get_pos(matrix: Array, character: String) -> Vector2i:
 			if matrix[r][c] == character:
 				return Vector2i(c, r) # Returns (Column, Row)
 	return Vector2i(0,0)
+
+
+# Calculates exactly what Playfair SHOULD return for any given input
+static func get_expected_playfair_output(original_text: String) -> String:
+	var clean = ""
+	
+	# Rule 1: Normalize (Upper, J->I, Alpha Only)
+	var raw = original_text.to_upper().replace("J", "I")
+	for i in range(raw.length()):
+		var c = raw[i]
+		if c >= "A" and c <= "Z":
+			clean += c
+			
+	# Rule 2: Handle Double Letters and Padding (The 'X' Rules)
+	var expected = ""
+	var i = 0
+	while i < clean.length():
+		var char_a = clean[i]
+		var char_b = ""
+		
+		# Check the neighbor
+		if (i + 1) < clean.length():
+			char_b = clean[i+1]
+			if char_a == char_b:
+				# Duplicate found (e.g. "LL") -> Expect "LX"
+				char_b = "X"
+				i += 1 
+			else:
+				# Normal pair -> Keep both
+				i += 2 
+		else:
+			# Odd ending -> Expect Padding "X"
+			char_b = "X"
+			i += 1
+			
+		expected += char_a + char_b
+		
+	return expected

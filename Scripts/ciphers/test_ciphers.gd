@@ -21,7 +21,8 @@ func _ready():
 		Polyalphabetic,
 		RailFence,
 		RowColumnTransposition,
-		Playfair
+		Playfair,
+		Hill
 	]
 	
 	for cipher in ciphers:
@@ -39,6 +40,8 @@ func test(cipher: Script) -> void:
 	elif cipher == OneTimePad:
 		# SPECIAL CASE: OTP needs a key as long as the text
 		key = OneTimePad.generate_random_key(plain_text.length())
+	elif cipher == Hill:
+		key = Hill.generate_valid_key()
 	else:								# TYPE_STRING == 4 or VARIANT == 0
 		key = key_string_alpha_perm
 	
@@ -54,7 +57,10 @@ func test(cipher: Script) -> void:
 	var expected_text = plain_text
 	
 	if cipher == Playfair:
-		expected_text = get_expected_playfair_output(plain_text)
+		expected_text = Playfair.get_expected_playfair_output(plain_text)
+		
+	if cipher == Hill:
+		expected_text = Hill.get_expected_hill_output(plain_text)
 		
 	print("expected:   " + expected_text)
 	
@@ -67,41 +73,3 @@ func test(cipher: Script) -> void:
 	else:
 		printerr("[FAIL] %s cipher is not working properly." % cipher.get_global_name())
 	print()
-
-
-# Calculates exactly what Playfair SHOULD return for any given input
-func get_expected_playfair_output(original_text: String) -> String:
-	var clean = ""
-	
-	# Rule 1: Normalize (Upper, J->I, Alpha Only)
-	var raw = original_text.to_upper().replace("J", "I")
-	for i in range(raw.length()):
-		var c = raw[i]
-		if c >= "A" and c <= "Z":
-			clean += c
-			
-	# Rule 2: Handle Double Letters and Padding (The 'X' Rules)
-	var expected = ""
-	var i = 0
-	while i < clean.length():
-		var char_a = clean[i]
-		var char_b = ""
-		
-		# Check the neighbor
-		if (i + 1) < clean.length():
-			char_b = clean[i+1]
-			if char_a == char_b:
-				# Duplicate found (e.g. "LL") -> Expect "LX"
-				char_b = "X"
-				i += 1 
-			else:
-				# Normal pair -> Keep both
-				i += 2 
-		else:
-			# Odd ending -> Expect Padding "X"
-			char_b = "X"
-			i += 1
-			
-		expected += char_a + char_b
-		
-	return expected
