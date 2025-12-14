@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://eq3roeeihepq"]
+[gd_scene load_steps=23 format=3 uid="uid://eq3roeeihepq"]
 
+[ext_resource type="Script" uid="uid://ughumvxo75tw" path="res://Scripts/level_1.gd" id="1_70k3q"]
 [ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="1_oanmv"]
 [ext_resource type="Texture2D" uid="uid://gnd76pyavpia" path="res://assets/Tileset/Tileset.png" id="2_8fnge"]
 [ext_resource type="Texture2D" uid="uid://c50imw3ldk5cn" path="res://assets/keys/pxkw_a.png" id="2_u5bo4"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="6_oanmv"]
 [ext_resource type="Script" uid="uid://dmypm1ibiskyr" path="res://Scripts/strat_game.gd" id="11_u5bo4"]
 [ext_resource type="Script" uid="uid://bna7lf5je2u6s" path="res://Scripts/traning.gd" id="12_40xyo"]
+[ext_resource type="PackedScene" uid="uid://clqale5qwhkbu" path="res://Scens/dialogue_box.tscn" id="14_qa7wf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5bo4"]
 texture = ExtResource("2_8fnge")
@@ -509,12 +511,14 @@ size = Vector2(112, 71)
 
 [node name="level1" type="Node2D"]
 position = Vector2(-32, 4)
+script = ExtResource("1_70k3q")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -38.0
-offset_top = -75.0
-offset_right = 1732.0
-offset_bottom = 1071.0
+offset_left = -26.0
+offset_top = -74.0
+offset_right = 1744.0
+offset_bottom = 1072.0
+size_flags_horizontal = 0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -609,6 +613,8 @@ script = ExtResource("12_40xyo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Traning"]
 position = Vector2(7, -3.5)
 shape = SubResource("RectangleShape2D_5uchn")
+
+[node name="DialogueBox" parent="." instance=ExtResource("14_qa7wf")]
 
 [connection signal="body_entered" from="strat_game" to="strat_game" method="_on_body_entered"]
 [connection signal="body_entered" from="Traning" to="Traning" method="_on_body_entered"]
