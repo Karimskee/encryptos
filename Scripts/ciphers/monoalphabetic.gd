@@ -9,7 +9,7 @@ static func encrypt(key_string: Variant, text: String) -> String:
 	
 	# validation
 	if key_string.length() != 26:
-		push_error("Monoalphabetic Key must be exactly 26 characters.")
+		printerr("Monoalphabetic Key must be exactly 26 characters.")
 		return ""
 
 	var buffer: PackedByteArray = text.to_utf8_buffer()
