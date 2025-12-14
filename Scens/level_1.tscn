@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bhfvxsmh27wqe" path="res://assets/Traps/Trap4.png" id="5_jk42d"]
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="6_oanmv"]
 [ext_resource type="Script" uid="uid://dmypm1ibiskyr" path="res://Scripts/strat_game.gd" id="11_u5bo4"]
-[ext_resource type="Script" path="res://Scripts/traning.gd" id="12_40xyo"]
+[ext_resource type="Script" uid="uid://bna7lf5je2u6s" path="res://Scripts/traning.gd" id="12_40xyo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5bo4"]
 texture = ExtResource("2_8fnge")
