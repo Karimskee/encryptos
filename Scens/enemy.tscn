@@ -1,7 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://sm7eppna178c"]
+[gd_scene load_steps=35 format=3 uid="uid://sm7eppna178c"]
 
 [ext_resource type="Texture2D" uid="uid://d4craq2vivc73" path="res://assets/Enemies/Alien6.png" id="1_nnbbe"]
 [ext_resource type="Script" uid="uid://bphbdynmgid5n" path="res://Scripts/enemy.gd" id="1_utw11"]
+[ext_resource type="Texture2D" uid="uid://k8xsbb1cxr1a" path="res://assets/Enemies/Warrior/deathfx-Sheet.png" id="3_kamvi"]
+[ext_resource type="Texture2D" uid="uid://bq4thjcsnj7ay" path="res://assets/Enemies/Warrior/warriorwalk-Sheet.png" id="4_p8tl3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_utw11"]
 atlas = ExtResource("1_nnbbe")
@@ -58,6 +60,26 @@ region = Rect2(256, 256, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fewqx"]
 atlas = ExtResource("1_nnbbe")
 region = Rect2(320, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2csan"]
+atlas = ExtResource("3_kamvi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3hce"]
+atlas = ExtResource("3_kamvi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgfcf"]
+atlas = ExtResource("3_kamvi")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tg2ed"]
+atlas = ExtResource("3_kamvi")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksbao"]
+atlas = ExtResource("4_p8tl3")
+region = Rect2(112, 0, 14, 2)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5sxo"]
 atlas = ExtResource("1_nnbbe")
@@ -140,10 +162,28 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fewqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fewqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2csan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3hce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgfcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tg2ed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksbao")
 }],
 "loop": false,
 "name": &"Dead",
-"speed": 5.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -185,7 +225,9 @@ script = ExtResource("1_utw11")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_utw11")
-animation = &"Run"
+animation = &"Dead"
+frame = 10
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.235, 1.235)

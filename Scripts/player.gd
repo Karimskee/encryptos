@@ -362,9 +362,9 @@ func die():
 	
 	print("Player died!")
 	
-	# Respawn after delay
+	# استنى 3 ثواني بعدين اعد تشغيل الـ Scene
 	await get_tree().create_timer(3.0).timeout
-	respown()
+	get_tree().reload_current_scene()
 
 
 func _update_animation() -> void:

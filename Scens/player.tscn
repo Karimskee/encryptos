@@ -383,7 +383,7 @@ size = Vector2(15.5, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1jf2"]
 size = Vector2(16, 20)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_4tq17")
 speed = 150.0
 jump_force = 350.0
