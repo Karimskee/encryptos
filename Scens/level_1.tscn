@@ -13,12 +13,6 @@
 [ext_resource type="Script" path="res://Scripts/strat_game.gd" id="11_u5bo4"]
 [ext_resource type="Script" path="res://Scens/traning.gd" id="12_40xyo"]
 
-[gd_scene load_steps=9 format=3 uid="uid://eq3roeeihepq"]
-
-[ext_resource type="Texture2D" uid="uid://cdohq75qpxqan" path="res://Super Grotto Escape/Environment/tileset/tileset.png" id="1_vlr0h"]
-[ext_resource type="Script" uid="uid://dotyu7e2bdmw8" path="res://Scripts/ciphers/caesar.gd" id="3_wxgfh"]
-[ext_resource type="Script" uid="uid://p6ap57wpbdo3" path="res://Scripts/ciphers/test_ciphers.gd" id="4_v7cy7"]
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5bo4"]
 texture = ExtResource("2_8fnge")
 0:0/0 = 0
@@ -514,6 +508,7 @@ size = Vector2(108, 71)
 size = Vector2(112, 71)
 
 [node name="level1" type="Node2D"]
+position = Vector2(-32, 4)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -38.0
@@ -617,10 +612,3 @@ shape = SubResource("RectangleShape2D_5uchn")
 
 [connection signal="body_entered" from="strat_game" to="strat_game" method="_on_body_entered"]
 [connection signal="body_entered" from="Traning" to="Traning" method="_on_body_entered"]
-[node name="Ciphers" type="Node" parent="."]
-    
-[node name="Caesar" type="Node" parent="Ciphers"]
-script = ExtResource("3_wxgfh")
-
-[node name="Tester" type="Node" parent="Ciphers"]
-script = ExtResource("4_v7cy7")
