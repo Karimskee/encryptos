@@ -18,7 +18,8 @@ func _ready():
 		Caesar,
 		Monoalphabetic,
 		OneTimePad,
-		Polyalphabetic
+		Polyalphabetic,
+		RailFence
 	]
 	
 	for cipher in ciphers:
