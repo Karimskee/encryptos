@@ -22,6 +22,6 @@ func _process(delta: float) -> void:
 	if entered == true:
 		if Input.is_action_just_pressed("Enter"):
 			print("Enter pressed! Changing scene...")
-			get_tree().change_scene_to_file("res://Scens/encryption.tscn")  
+			Transition.fade_out(func ():get_tree().change_scene_to_file("res://Scens/encryption.tscn"))  
 			
 			
