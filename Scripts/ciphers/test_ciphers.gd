@@ -3,8 +3,7 @@ extends Node
 
 # Global variables
 var plain_text = "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 1234567890 !@#$%^&*()_+-=~,./;:'\"[]{}<>"
-var key_int = 3
-var key_string = "BACDEFGHIJKLMNOPQRSTUVWXYZ"
+var key = 3
 
 
 func _ready():
@@ -17,7 +16,7 @@ func _ready():
 	]
 	
 	for cipher in ciphers:
-		test(cipher, plain_text)
+		test(cipher, plain_text, key)
 
 
 func test(cipher: Script, plain_text: String) -> void:
