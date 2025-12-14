@@ -19,7 +19,8 @@ func _ready():
 		Monoalphabetic,
 		OneTimePad,
 		Polyalphabetic,
-		RailFence
+		RailFence,
+		RowColumnTransposition
 	]
 	
 	for cipher in ciphers:
