@@ -55,7 +55,6 @@ func _ready() -> void:
 		if sprite.animation != "Idle":
 			sprite.play("Idle")
 
-
 func _physics_process(delta: float) -> void:
 	# لو انيميشن الدخول شغال، نوقف كل حاجة
 	if is_playing_enter_animation:
@@ -107,7 +106,7 @@ func _physics_process(delta: float) -> void:
 	# input (guarded by control flag and not attacking)
 	var input_dir: float = 0.0
 	if control_enabled and not is_attacking:
-		input_dir = Input.get_axis("Left", "Right")
+		input_dir = Input.get_axis("Left", "Right") # -1..1
 	
 	# Dash input
 	if control_enabled and not is_attacking and not is_dashing and Input.is_action_just_pressed("Dash"):
@@ -120,6 +119,7 @@ func _physics_process(delta: float) -> void:
 	
 	# horizontal accel/decel toward target_x
 	var target_x := input_dir * speed
+	# Fixed: proper ternary syntax in GDScript
 	var change_rate := accel if abs(target_x) > abs(velocity.x) else deccel
 	velocity.x = move_toward(velocity.x, target_x, change_rate * delta)
 	
@@ -143,24 +143,21 @@ func _physics_process(delta: float) -> void:
 			_do_jump()
 			jump_buffer_timer = 0.0
 	
-	# move
+	# move (CharacterBody2D will update its velocity property)
 	move_and_slide()
 	
 	# animation state
 	_update_animation()
-
 
 func _do_jump() -> void:
 	velocity.y = -jump_force
 	jumps_left = max(0, jumps_left - 1)
 	coyote_timer = 0.0
 
-
 func _flip(face_right: bool) -> void:
 	facing_right = face_right
 	if sprite:
 		sprite.flip_h = not facing_right
-
 
 func _start_attack() -> void:
 	is_attacking = true
@@ -193,7 +190,6 @@ func _on_animation_finished() -> void:
 			# الداش بينتهي بالتايمر مش بالأنيميشن
 			pass
 
-
 func take_damage(knockback: Vector2 = Vector2.ZERO) -> void:
 	control_enabled = false
 	hurt_timer = hurt_duration
@@ -202,7 +198,6 @@ func take_damage(knockback: Vector2 = Vector2.ZERO) -> void:
 	velocity = knockback
 	if sprite:
 		sprite.play("Hurt")
-
 
 func _update_animation() -> void:
 	if sprite == null:
@@ -224,13 +219,11 @@ func _update_animation() -> void:
 			sprite.play("Attack")
 		return
 	
-	# hurt animation
 	if not control_enabled and hurt_timer > 0.0:
 		if sprite.animation != "Hurt":
 			sprite.play("Hurt")
 		return
 	
-	# air animations
 	if not is_on_floor():
 		if velocity.y < -10.0:
 			if sprite.animation != "Jump":
@@ -240,7 +233,6 @@ func _update_animation() -> void:
 				sprite.play("Fall")
 		return
 	
-	# ground animations
 	if abs(velocity.x) > 10.0:
 		if sprite.animation != "Run":
 			sprite.play("Run")
