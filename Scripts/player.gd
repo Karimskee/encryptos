@@ -8,6 +8,9 @@ extends CharacterBody2D
 @export var gravity: float = 1200.0
 @export var max_jumps: int = 1
 
+# 🔥 المتغير الخاص بالدبل جمب (الـ NPC هيغير ده لـ true)
+var can_double_jump = false 
+
 @export var knockback_force: float = 400.0
 @export var attack_damage: int = 1
 @export var attack_area_offset: float = 30.0
@@ -19,7 +22,7 @@ var current_health: int = 5
 var is_knocked_back := false
 
 # Shield System
-@export var max_shield_durability: int = 6 # عدد المحاولات (6)
+@export var max_shield_durability: int = 6 
 var current_shield_durability: int = 6
 var is_blocking: bool = false
 
@@ -27,7 +30,7 @@ var is_blocking: bool = false
 @export var coyote_time: float = 0.12
 @export var jump_buffer_time: float = 0.12
 
-# انيميشن الدخول للمنطقة
+# انيميشن الدخول
 @export var enter_animation_duration: float = 60
 
 # Dash settings
@@ -39,17 +42,15 @@ var is_blocking: bool = false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $AttackArea
 
-# --- تعريف نودز الصوت ---
+# Audio Nodes
 @onready var sfx_run: AudioStreamPlayer2D = $Audio/Run
 @onready var sfx_attack: AudioStreamPlayer2D = $Audio/Attack
 @onready var sfx_hurt: AudioStreamPlayer2D = $Audio/Hurt
 @onready var sfx_dash: AudioStreamPlayer2D = $Audio/Dash
 @onready var sfx_dead: AudioStreamPlayer2D = $Audio/Dead
-# -----------------------------
 
-# --- تعريف نود البارتكلز للداش ---
+# Particles
 @onready var dash_particles: GPUParticles2D = $DashParticles
-# --------------------------------
 
 # state
 var facing_right: bool = true
@@ -77,7 +78,6 @@ signal player_died
 func respown():
 	self.global_position = Vector2(106, 213)
 	current_health = max_health
-	# إعادة ملء الدرع عند الريسبون
 	current_shield_durability = max_shield_durability 
 	
 	is_dead = false
@@ -102,6 +102,11 @@ func respown():
 
 
 func _ready() -> void:
+	# 1. استرجاع القدرات من الجيم مانجر
+	can_double_jump = GameManager.unlocked_double_jump
+	attack_damage = GameManager.current_damage
+	
+	# ... (باقي كودك القديم زي ما هو)
 	jumps_left = max_jumps
 	current_health = max_health
 	current_shield_durability = max_shield_durability
@@ -122,8 +127,7 @@ func _physics_process(delta: float) -> void:
 			sfx_run.stop()
 		return
 	
-	# --- منطق الدرع (Block Logic) ---
-	# الشرط: دايس كليك يمين + على الأرض + مش بيضرب + مش بيعمل داش + معاه درع
+	# --- Block Logic ---
 	if Input.is_action_pressed("Block") and is_on_floor() and not is_attacking and not is_dashing and current_shield_durability > 0:
 		if not is_blocking:
 			is_blocking = true
@@ -160,11 +164,19 @@ func _physics_process(delta: float) -> void:
 		if velocity.y > 0.0 and not is_knocked_back:
 			velocity.y = 0.0
 	
+	# --- 🔥 تعديل منطق القفز هنا 🔥 ---
 	if is_on_floor():
 		coyote_timer = coyote_time
-		jumps_left = max_jumps
+		
+		# لو اللاعب عنده القدرة، بنعطيه نطتين (واحدة من الأرض وواحدة في الهوا)
+		# لو معندوش، بياخد القيمة الافتراضية (1)
+		if can_double_jump:
+			jumps_left = 2
+		else:
+			jumps_left = max_jumps
 	else:
 		coyote_timer = max(0.0, coyote_timer - delta)
+	# ------------------------------------
 	
 	if jump_buffer_timer > 0.0:
 		jump_buffer_timer = max(0.0, jump_buffer_timer - delta)
@@ -177,7 +189,6 @@ func _physics_process(delta: float) -> void:
 	
 	# --- Input Movement ---
 	var input_dir: float = 0.0
-	# ضفنا شرط (not is_blocking) عشان اللاعب مايمشيش وهو رافع الدرع
 	if control_enabled and not is_attacking and not is_blocking:
 		input_dir = Input.get_axis("Left", "Right")
 	
@@ -208,7 +219,8 @@ func _physics_process(delta: float) -> void:
 		if coyote_timer > 0.0 and jumps_left > 0:
 			_do_jump()
 			jump_buffer_timer = 0.0
-		elif not is_on_floor() and jumps_left > 0 and max_jumps > 1:
+		# 🔥 التعديل هنا: السماح بالنط في الهوا طالما jumps_left > 0
+		elif not is_on_floor() and jumps_left > 0:
 			_do_jump()
 			jump_buffer_timer = 0.0
 	
@@ -322,7 +334,6 @@ func take_damage_no_knockback() -> void:
 	if is_dead:
 		return
 	
-	# ممكن نضيف فحص للدرع هنا برضو لو حابب، بس حاليا هنسيبها للضرر المباشر
 	current_health -= 1
 	health_changed.emit(current_health, max_health)
 	
@@ -336,23 +347,19 @@ func take_damage_no_knockback() -> void:
 func apply_knockback(enemy_position: Vector2, force_override: float = -1) -> void:
 	if is_dead: return
 	
-	# --- منطق الدرع والاتجاه ---
 	var direction_to_enemy = sign(enemy_position.x - global_position.x)
 	var my_facing = 1 if facing_right else -1
 	
-	# لو رافع الدرع + العدو قدام وشي + لسه معايا درع
 	if is_blocking and direction_to_enemy == my_facing and current_shield_durability > 0:
 		current_shield_durability -= 1
 		print("Blocked! Shield left: ", current_shield_durability)
 		
-		# Recoil effect
 		velocity.x = -my_facing * 100 
 		
 		if current_shield_durability <= 0:
 			is_blocking = false
 			print("Shield Broken!")
 		return 
-	# ------------------
 	
 	current_health -= 1
 	health_changed.emit(current_health, max_health)
@@ -385,21 +392,18 @@ func take_damage(enemy_position: Vector2 = Vector2.ZERO) -> void:
 	apply_knockback(enemy_position)
 
 
-# --- دالة تلقي ضربة البوس (مع الدرع) ---
 func take_boss_damage(dmg_amount: int, boss_pos: Vector2, force: float):
 	if is_dead: return
 	
 	var direction_to_enemy = sign(boss_pos.x - global_position.x)
 	var my_facing = 1 if facing_right else -1
 	
-	# منطق صد البوس (بيخصم 2 من الدرع)
 	if is_blocking and direction_to_enemy == my_facing and current_shield_durability > 0:
 		current_shield_durability -= 1
 		print("Boss Blocked! Shield left: ", current_shield_durability)
 		velocity.x = -my_facing * 300 
 		return
 	
-	# لو مفيش صد
 	current_health -= dmg_amount
 	health_changed.emit(current_health, max_health)
 	
@@ -478,12 +482,10 @@ func _update_animation() -> void:
 			sprite.play("Hurt")
 		return
 		
-	# --- تعديل مهم: أنيميشن البلوك ---
 	if is_blocking:
 		if sprite.animation != "Block":
 			sprite.play("Block")
-		return # اخرج من الدالة عشان Idle ميشتغلش فوقها
-	# -----------------------------
+		return 
 	
 	if is_dashing:
 		if sprite.animation != "Dash":

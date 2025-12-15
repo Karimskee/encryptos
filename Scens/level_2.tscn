@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://da373y06mqrxk"]
+[gd_scene load_steps=23 format=3 uid="uid://da373y06mqrxk"]
 
 [ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="1_of1ea"]
 [ext_resource type="Texture2D" uid="uid://fuasmlsgbiqe" path="res://assets/image.png" id="2_44npc"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://d2fb02dwnwjwk" path="res://Scens/enemy_2.tscn" id="12_x1vh1"]
 [ext_resource type="PackedScene" uid="uid://dj6vq5cfj3157" path="res://Scens/enemy_3.tscn" id="13_5kok1"]
 [ext_resource type="PackedScene" uid="uid://clg0hi0mrcxnb" path="res://Scens/health_ui.tscn" id="14_hx56y"]
+[ext_resource type="PackedScene" uid="uid://bqoini4l5a6k1" path="res://Scens/tutorial_npc.tscn" id="15_h6ppn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hx56y"]
 texture = ExtResource("4_5kok1")
@@ -540,6 +541,10 @@ position = Vector2(175, 38.999996)
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("2_44npc")
 flip_h = true
+
+[node name="TutorialNPC" parent="." instance=ExtResource("15_h6ppn")]
+position = Vector2(129, 234)
+scale = Vector2(0.52, 0.52)
 
 [node name="Player" parent="." instance=ExtResource("3_x1vh1")]
 position = Vector2(96, -82)
