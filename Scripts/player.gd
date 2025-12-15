@@ -94,6 +94,7 @@ func respown():
 
 
 func _ready() -> void:
+	
 	jumps_left = max_jumps
 	current_health = max_health
 	

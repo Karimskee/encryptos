@@ -6,7 +6,6 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1c4p"]
 bg_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
-border_width_top = 10
 border_color = Color(0.8978127, 0.8978128, 0.89781255, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -20,7 +19,7 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -950.0
+offset_left = -960.0
 offset_top = -243.0
 offset_right = 962.0
 grow_horizontal = 2

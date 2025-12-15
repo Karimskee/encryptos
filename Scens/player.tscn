@@ -409,6 +409,7 @@ anim_speed_min = 5.99
 anim_speed_max = 5.99
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
 script = ExtResource("1_4tq17")
 speed = 150.0
 jump_force = 350.0
@@ -423,6 +424,8 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_dkxhe")
 
 [node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(8, -1)

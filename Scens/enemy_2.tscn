@@ -200,13 +200,12 @@ size = Vector2(20, 23.481781)
 size = Vector2(20.149252, 23.28358)
 
 [node name="enemy-2" type="CharacterBody2D"]
+collision_layer = 4
 script = ExtResource("1_k2tdw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2csan")
-animation = &"Dead"
-frame = 6
-frame_progress = 1.0
+animation = &"Attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.49999976)
@@ -217,6 +216,8 @@ shape = SubResource("RectangleShape2D_k2tdw")
 target_position = Vector2(0, 31)
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
