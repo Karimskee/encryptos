@@ -1,11 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7p2iom2fvoja"]
+[gd_scene load_steps=20 format=3 uid="uid://c7p2iom2fvoja"]
 
 [ext_resource type="Texture2D" uid="uid://gnd76pyavpia" path="res://assets/Tileset/Tileset.png" id="1_0gi7g"]
+[ext_resource type="Script" uid="uid://b8ay8rcbis6ik" path="res://Scripts/my_room.gd" id="1_qodoi"]
 [ext_resource type="Texture2D" uid="uid://cyrvs4dglq1q2" path="res://assets/Tileset/Tileset_Borders.png" id="2_5mfjo"]
 [ext_resource type="Texture2D" uid="uid://1lwm5r57wbin" path="res://assets/Traps/Trap5.png" id="3_l77nu"]
 [ext_resource type="Texture2D" uid="uid://bhfvxsmh27wqe" path="res://assets/Traps/Trap4.png" id="4_qodoi"]
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="5_yquvj"]
 [ext_resource type="Texture2D" uid="uid://fuasmlsgbiqe" path="res://assets/image.png" id="6_jepi4"]
+[ext_resource type="Texture2D" uid="uid://bushl1gh1iupj" path="res://assets/Objects/Door.png" id="6_l77nu"]
+[ext_resource type="PackedScene" uid="uid://csiad1xnelatm" path="res://Scens/player.tscn" id="7_5mfjo"]
+[ext_resource type="Script" uid="uid://byjrkanmuofad" path="res://Scripts/room_computer.gd" id="10_yquvj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iu5xp"]
 texture = ExtResource("1_0gi7g")
@@ -81,8 +85,11 @@ texture = ExtResource("1_0gi7g")
 3:5/0 = 0
 4:5/0 = 0
 6:5/0 = 0
+6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -4.9461155, -8, -4.9239883, -8, 8, 8, 8)
 7:5/0 = 0
+7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -4.9461155, -8, -4.9239883, -8, 8, 8, 8)
 8:5/0 = 0
+8:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -4.9461155, -8, -4.9239883, -8, 8, 8, 8)
 9:5/0 = 0
 10:5/0 = 0
 12:5/0 = 0
@@ -232,10 +239,14 @@ texture = ExtResource("2_5mfjo")
 7:5/0 = 0
 8:5/0 = 0
 0:7/0 = 0
+0:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, 1.1690817, 8, 0.9892225, -8)
 1:7/0 = 0
+1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 0.9892235, 8, 8, -8, 8, -8, 1.1690817)
 2:7/0 = 0
 3:7/0 = 0
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -0.9892225, -1.528799, -0.8093643, -1.7086582, 8, -8, 8)
 4:7/0 = 0
+4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, 1.528799, 8, 1.3489399, -0.9892225, -8, -1.1690817)
 6:7/0 = 0
 6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 1.8885164, 8, 8, 1.528799, 8, 1.8885164, 1.8885164)
 7:7/0 = 0
@@ -247,10 +258,14 @@ texture = ExtResource("2_5mfjo")
 10:7/0 = 0
 10:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, 2.2482347, 8, 2.2482347, -1.8885164, -8, -1.8885164)
 0:8/0 = 0
+0:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, 1.1690817, 8, 0.9892225, -8)
 1:8/0 = 0
 2:8/0 = 0
+2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.9892235, -8, -1.1690817, 8, -8, 8, -8, 8, -8, -8)
 3:8/0 = 0
+3:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -1.1690817, -8, -1.528799, 1.1690817, 8, 0.8093643, 8, 8, -8, 8)
 4:8/0 = 0
+4:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 1.3489408, 0.8093643, 1.1690817, 0.9892225, -8, 8, -8, 8, 8, -8, 8)
 6:8/0 = 0
 6:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, 2.2482347, 8, 2.2482347, -8)
 7:8/0 = 0
@@ -262,6 +277,7 @@ texture = ExtResource("2_5mfjo")
 10:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, 8, 8, 8, -8, 2.0683756, -8, 2.0683756, 1.8885164, -8, 2.0683756)
 0:9/0 = 0
 1:9/0 = 0
+1:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, -1.1690817, -8, -1.1690817, -8, -8)
 2:9/0 = 0
 6:9/0 = 0
 6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, -2.0683756, 2.2482347, -1.7086582, 2.0683756, -8)
@@ -487,6 +503,45 @@ texture = ExtResource("5_yquvj")
 16:8/0 = 0
 17:8/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qodoi"]
+texture = ExtResource("6_l77nu")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_wtv2r"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_iu5xp")
@@ -494,14 +549,22 @@ sources/1 = SubResource("TileSetAtlasSource_cvsx7")
 sources/2 = SubResource("TileSetAtlasSource_hawwd")
 sources/13 = SubResource("TileSetAtlasSource_8xw03")
 sources/14 = SubResource("TileSetAtlasSource_fh4g6")
+sources/3 = SubResource("TileSetAtlasSource_qodoi")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l77nu"]
+size = Vector2(152.94104, 205.88239)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jepi4"]
+size = Vector2(40, 39)
 
 [node name="myRoom" type="Node2D"]
+script = ExtResource("1_qodoi")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 31.0
-offset_top = -23.0
-offset_right = 1801.0
-offset_bottom = 1123.0
+offset_left = 30.0
+offset_top = -33.0
+offset_right = 1800.0
+offset_bottom = 1113.0
 size_flags_horizontal = 0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
@@ -511,12 +574,51 @@ tile_set = SubResource("TileSet_wtv2r")
 format = 2
 layer_0/name = "Layer1"
 layer_0/z_index = 1
-layer_0/tile_data = PackedInt32Array(1179683, 1, 8, 1245219, 262145, 8, 1245218, 65537, 7, 1245208, 65537, 7, 1245209, 65537, 7, 1245210, 65537, 7, 1245211, 65537, 7, 1245212, 65537, 7, 1245213, 65537, 7, 1245214, 65537, 7, 1245215, 65537, 7, 1245216, 65537, 7, 1245217, 65537, 7, 786467, 262145, 7, 852003, 1, 8, 917539, 1, 8, 983075, 1, 8, 1048611, 1, 8, 1114147, 1, 8, 786456, 65537, 9, 786457, 65537, 9, 786458, 65537, 9, 786459, 65537, 9, 786460, 65537, 9, 786461, 65537, 9, 786462, 65537, 9, 786463, 65537, 9, 786464, 65537, 9, 786465, 65537, 9, 786466, 65537, 9, 786446, 196609, 7, 1245198, 196609, 8, 786447, 65537, 9, 1245199, 65537, 7, 786448, 65537, 9, 1245200, 65537, 7, 786449, 65537, 9, 1245201, 65537, 7, 786450, 65537, 9, 1245202, 65537, 7, 786451, 65537, 9, 1245203, 65537, 7, 786452, 65537, 9, 1245204, 65537, 7, 786453, 65537, 9, 1245205, 65537, 7, 786454, 65537, 9, 1245206, 65537, 7, 786455, 65537, 9, 1245207, 65537, 7, 851982, 131073, 8, 917518, 131073, 8, 983054, 131073, 8, 1048590, 131073, 8, 1114126, 131073, 8, 1179662, 131073, 8)
 layer_1/name = "Layer2"
-layer_1/tile_data = PackedInt32Array(1245198, 458752, 5, 1245199, 458752, 5, 1245200, 458752, 5, 1245201, 458752, 5, 1245202, 458752, 5, 1245203, 458752, 5, 1245204, 458752, 5, 1245205, 458752, 5, 1245206, 458752, 5, 1245207, 458752, 5, 1245208, 458752, 5, 1245209, 458752, 5, 1245210, 458752, 5, 1245211, 458752, 5, 1245212, 458752, 5, 1245213, 458752, 5, 1245214, 458752, 5, 1245215, 458752, 5, 1245216, 458752, 5, 1245217, 458752, 5, 1245218, 458752, 5, 1245219, 524288, 5, 917536, 1114114, 0, 983072, 1114114, 1, 1048608, 1114114, 2, 917537, 1179650, 0, 983073, 1179650, 1, 1048609, 1179650, 2, 524294, 655362, 6)
+layer_1/tile_data = PackedInt32Array(524294, 655362, 6)
 layer_2/name = "Layer3"
+layer_2/tile_data = PackedInt32Array(1114140, 589827, 0, 1179676, 589827, 1, 1245212, 589827, 2, 1114141, 655363, 0, 1179677, 655363, 1, 1245213, 655363, 2, 1114142, 720899, 0, 1179678, 720899, 1, 1245214, 720899, 2)
 
 [node name="Image" type="Sprite2D" parent="."]
-position = Vector2(562, 293)
-scale = Vector2(0.11, 0.11)
+position = Vector2(556, 287)
+scale = Vector2(0.17, 0.17)
 texture = ExtResource("6_jepi4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(556.00006, 288.5)
+scale = Vector2(0.16999996, 0.16999996)
+shape = SubResource("RectangleShape2D_l77nu")
+
+[node name="Player" parent="." instance=ExtResource("7_5mfjo")]
+position = Vector2(526.00006, 294.00003)
+scale = Vector2(1.2954, 1.2954)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(5, 5)
+limit_left = 420
+limit_top = 170
+limit_right = 600
+limit_bottom = 340
+
+[node name="TileMap3" type="TileMap" parent="."]
+position = Vector2(0, 3.0517578e-05)
+scale = Vector2(0.99999994, 0.99999994)
+tile_set = SubResource("TileSet_wtv2r")
+format = 2
+layer_0/name = "Layer1"
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(1179683, 1, 8, 1245219, 262145, 8, 1245218, 65537, 7, 1245216, 65537, 7, 1245217, 65537, 7, 786467, 262145, 7, 852003, 1, 8, 917539, 1, 8, 983075, 1, 8, 1048611, 1, 8, 1114147, 1, 8, 786464, 65537, 9, 786465, 65537, 9, 786466, 65537, 9, 786460, 196609, 7, 1245212, 196609, 8, 786461, 65537, 9, 1245213, 65537, 7, 786462, 65537, 9, 1245214, 65537, 7, 786463, 65537, 9, 1245215, 65537, 7, 851996, 131073, 8, 917532, 131073, 8, 983068, 131073, 8, 1048604, 131073, 8, 1114140, 131073, 8, 1179676, 131073, 8)
+layer_1/name = "Layer2"
+layer_1/tile_data = PackedInt32Array(1245218, 458752, 5, 1245219, 524288, 5, 917536, 1114114, 0, 983072, 1114114, 1, 1048608, 1114114, 2, 917537, 1179650, 0, 983073, 1179650, 1, 1048609, 1179650, 2, 524294, 655362, 6, 1245215, 458752, 5, 1245216, 458752, 5, 1245217, 458752, 5, 1245212, 458752, 5, 1245213, 458752, 5, 1245214, 458752, 5)
+layer_2/name = "Layer3"
+
+[node name="RoomComputer" type="Area2D" parent="."]
+position = Vector2(556, 284)
+script = ExtResource("10_yquvj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomComputer"]
+position = Vector2(-7, 1.5)
+shape = SubResource("RectangleShape2D_jepi4")
+debug_color = Color(0.3079615, 0.6273533, 3.85046e-07, 0.41960785)
+
+[connection signal="body_entered" from="RoomComputer" to="RoomComputer" method="_on_body_entered"]

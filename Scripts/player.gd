@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var deccel: float = 1800.0
 @export var jump_force: float = 450.0
 @export var gravity: float = 1200.0
-@export var max_jumps: int = 1  
+@export var max_jumps: int = 1
 
 @export var knockback_force: float = 400.0
 @export var attack_damage: int = 1
@@ -33,6 +33,19 @@ var is_knocked_back := false
 # nodes
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $AttackArea
+
+# --- تعريف نودز الصوت ---
+@onready var sfx_run: AudioStreamPlayer2D = $Audio/Run
+@onready var sfx_attack: AudioStreamPlayer2D = $Audio/Attack
+@onready var sfx_hurt: AudioStreamPlayer2D = $Audio/Hurt
+@onready var sfx_dash: AudioStreamPlayer2D = $Audio/Dash
+@onready var sfx_dead: AudioStreamPlayer2D = $Audio/Dead
+# -----------------------------
+
+# --- تعريف نود البارتكلز للداش ---
+# سمي النود DashParticles وحط فيها السبيريت شيت
+@onready var dash_particles: GPUParticles2D = $DashParticles
+# --------------------------------
 
 # state
 var facing_right: bool = true
@@ -65,11 +78,9 @@ func respown():
 	is_knocked_back = false
 	velocity = Vector2.ZERO
 	
-	# رجّع الـ collision
 	set_collision_layer_value(1, true)
 	set_collision_mask_value(1, true)
 	
-	# رجّع الـ AttackArea
 	if attack_area:
 		attack_area.set_collision_layer_value(1, true)
 		attack_area.set_collision_mask_value(1, true)
@@ -78,7 +89,6 @@ func respown():
 	
 	health_changed.emit(current_health, max_health)
 	
-	# رجّع الأنيميشن
 	if sprite:
 		sprite.play("Idle")
 
@@ -93,17 +103,16 @@ func _ready() -> void:
 			sprite.play("Idle")
 	
 	_update_attack_area_position()
-	
-	# أرسل الصحة الابتدائية
 	health_changed.emit(current_health, max_health)
 
 
 func _physics_process(delta: float) -> void:
 	
 	if is_dead:
+		if sfx_run and sfx_run.playing:
+			sfx_run.stop()
 		return
 	
-	# لو انيميشن الدخول شغال، نوقف كل حاجة
 	if is_playing_enter_animation:
 		enter_animation_timer -= delta
 		if enter_animation_timer <= 0.0:
@@ -111,11 +120,9 @@ func _physics_process(delta: float) -> void:
 			control_enabled = true
 		return
 	
-	# Dash cooldown timer
 	if dash_cooldown_timer > 0.0:
 		dash_cooldown_timer = max(0.0, dash_cooldown_timer - delta)
 	
-	# Dash logic
 	if is_dashing:
 		dash_timer -= delta
 		if dash_timer <= 0.0:
@@ -128,14 +135,12 @@ func _physics_process(delta: float) -> void:
 			_update_animation()
 			return
 	
-	# gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
 		if velocity.y > 0.0 and not is_knocked_back:
 			velocity.y = 0.0
 	
-	# timers
 	if is_on_floor():
 		coyote_timer = coyote_time
 		jumps_left = max_jumps
@@ -145,44 +150,36 @@ func _physics_process(delta: float) -> void:
 	if jump_buffer_timer > 0.0:
 		jump_buffer_timer = max(0.0, jump_buffer_timer - delta)
 	
-	# لو في knockback، متحركش اللاعب وخلي الـ velocity تقل تدريجياً
 	if is_knocked_back:
 		velocity.x = move_toward(velocity.x, 0.0, deccel * delta)
 		move_and_slide()
 		_update_animation()
 		return
 	
-	# input (guarded by control flag and not attacking)
 	var input_dir: float = 0.0
 	if control_enabled and not is_attacking:
 		input_dir = Input.get_axis("Left", "Right")
 	
-	# Dash input
 	if control_enabled and not is_attacking and not is_dashing and Input.is_action_just_pressed("Dash"):
 		if dash_cooldown_timer <= 0.0:
 			_start_dash()
 	
-	# attack input (left mouse button)
 	if control_enabled and not is_attacking and not is_dashing and Input.is_action_just_pressed("Attack"):
 		_start_attack()
 	
-	# horizontal accel/decel toward target_x
 	var target_x := input_dir * speed
 	var change_rate := accel if abs(target_x) > abs(velocity.x) else deccel
 	velocity.x = move_toward(velocity.x, target_x, change_rate * delta)
 	
-	# flip sprite if needed (not during attack or dash)
 	if not is_attacking and not is_dashing:
 		if input_dir > 0.0 and not facing_right:
 			_flip(true)
 		elif input_dir < 0.0 and facing_right:
 			_flip(false)
 	
-	# jump input: buffer the press
 	if control_enabled and not is_attacking and not is_dashing and Input.is_action_just_pressed("ui_accept"):
 		jump_buffer_timer = jump_buffer_time
 	
-	# perform jump if buffered + allowed
 	if jump_buffer_timer > 0.0 and not is_attacking and not is_dashing:
 		if coyote_timer > 0.0 and jumps_left > 0:
 			_do_jump()
@@ -191,10 +188,18 @@ func _physics_process(delta: float) -> void:
 			_do_jump()
 			jump_buffer_timer = 0.0
 	
-	# move
 	move_and_slide()
 	
-	# animation state
+	# --- منطق تشغيل الصوت ---
+	var is_moving = abs(velocity.x) > 10.0
+	if sfx_run:
+		if is_on_floor() and is_moving and not is_dashing and not is_attacking:
+			if not sfx_run.playing:
+				sfx_run.play()
+		else:
+			if sfx_run.playing:
+				sfx_run.stop()
+	
 	_update_animation()
 
 
@@ -209,6 +214,18 @@ func _flip(face_right: bool) -> void:
 	if sprite:
 		sprite.flip_h = not facing_right
 	_update_attack_area_position()
+	
+	# بنغير مكان البارتكلز عشان تطلع ورا ضهر اللاعب
+	if dash_particles:
+		# لو البارتكلز ليها Offset، نعكسه
+		# أو ممكن نستخدم Scale.x = -1
+		if face_right:
+			dash_particles.position.x = -abs(dash_particles.position.x)
+			# لو السبيريت شيت ليه اتجاه، ممكن تحتاج تعكس الـ scale بتاع البارتكلز:
+			dash_particles.scale.x = 1 
+		else:
+			dash_particles.position.x = abs(dash_particles.position.x)
+			dash_particles.scale.x = -1
 
 
 func _update_attack_area_position():
@@ -221,6 +238,9 @@ func _start_attack() -> void:
 	attack_hit_registered = false
 	if sprite:
 		sprite.play("Attack")
+	
+	if sfx_attack:
+		sfx_attack.play()
 	
 	var timer = get_tree().create_timer(0.2)
 	timer.timeout.connect(_check_attack_hit)
@@ -255,6 +275,16 @@ func _start_dash() -> void:
 	
 	if sprite:
 		sprite.play("Dash")
+	
+	if sfx_dash:
+		sfx_dash.play()
+		
+	# --- تشغيل بارتكلز الداش ---
+	if dash_particles:
+		# بنعمل restart عشان يعيد التشغيل حتى لو كان لسه مخلصش
+		dash_particles.restart()
+		dash_particles.emitting = true
+	# -------------------------
 
 
 func _on_animation_finished() -> void:
@@ -268,7 +298,6 @@ func _on_animation_finished() -> void:
 		elif sprite.animation == "Dash":
 			pass
 		elif sprite.animation == "Dead":
-			# اللاعب مات خلاص
 			pass
 
 
@@ -279,6 +308,9 @@ func take_damage_no_knockback() -> void:
 	current_health -= 1
 	health_changed.emit(current_health, max_health)
 	
+	if sfx_hurt:
+		sfx_hurt.play()
+	
 	if current_health <= 0:
 		die()
 
@@ -287,31 +319,28 @@ func apply_knockback(enemy_position: Vector2) -> void:
 	if is_dead:
 		return
 	
-	# خصم صحة
 	current_health -= 1
 	print("Player health: ", current_health)
 	health_changed.emit(current_health, max_health)
 	
-	# لو اللاعب كان بيهاجم ولسه ماسجلش الضربة، سجلها دلوقتي
+	if sfx_hurt:
+		sfx_hurt.play()
+	
 	if is_attacking and not attack_hit_registered:
 		_check_attack_hit()
 	
-	# شيك لو مات
 	if current_health <= 0:
 		die()
 		return
 	
-	# حساب اتجاه الـ knockback
 	var knockback_direction = sign(global_position.x - enemy_position.x)
 	if knockback_direction == 0:
 		knockback_direction = 1
 	
-	# تطبيق الـ knockback
 	is_knocked_back = true
 	velocity.x = knockback_direction * knockback_force
 	velocity.y = -knockback_force * 0.4
 	
-	# إيقاف الحركات التانية
 	control_enabled = false
 	is_attacking = false
 	is_dashing = false
@@ -344,11 +373,9 @@ func die():
 	is_dashing = false
 	velocity = Vector2.ZERO
 	
-	# عطّل كل الـ collision
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, false)
 	
-	# عطّل الـ AttackArea
 	if attack_area:
 		attack_area.set_collision_layer_value(1, false)
 		attack_area.set_collision_mask_value(1, false)
@@ -358,11 +385,13 @@ func die():
 	if sprite:
 		sprite.play("Dead")
 	
+	if sfx_dead:
+		sfx_dead.play()
+	
 	player_died.emit()
 	
 	print("Player died!")
 	
-	# استنى 3 ثواني بعدين اعد تشغيل الـ Scene
 	await get_tree().create_timer(3.0).timeout
 	get_tree().reload_current_scene()
 

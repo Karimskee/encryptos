@@ -1,6 +1,5 @@
-[gd_scene load_steps=23 format=3 uid="uid://eq3roeeihepq"]
+[gd_scene load_steps=22 format=3 uid="uid://eq3roeeihepq"]
 
-[ext_resource type="Script" uid="uid://ughumvxo75tw" path="res://Scripts/level_1.gd" id="1_70k3q"]
 [ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="1_oanmv"]
 [ext_resource type="Texture2D" uid="uid://gnd76pyavpia" path="res://assets/Tileset/Tileset.png" id="2_8fnge"]
 [ext_resource type="Texture2D" uid="uid://c50imw3ldk5cn" path="res://assets/keys/pxkw_a.png" id="2_u5bo4"]
@@ -15,7 +14,7 @@
 [ext_resource type="Script" uid="uid://bna7lf5je2u6s" path="res://Scripts/traning.gd" id="12_40xyo"]
 [ext_resource type="PackedScene" uid="uid://clqale5qwhkbu" path="res://Scens/dialogue_box.tscn" id="14_qa7wf"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5bo4"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5uchn"]
 texture = ExtResource("2_8fnge")
 0:0/0 = 0
 1:0/0 = 0
@@ -185,7 +184,7 @@ texture = ExtResource("2_8fnge")
 7:13/0 = 0
 8:13/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_40xyo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70k3q"]
 texture = ExtResource("3_4j7iv")
 0:0/0 = 0
 1:0/0 = 0
@@ -304,10 +303,10 @@ texture = ExtResource("3_4j7iv")
 7:12/0 = 0
 8:12/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5uchn"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qa7wf"]
 texture = ExtResource("4_en8a6")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70k3q"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t0upt"]
 texture = ExtResource("5_jk42d")
 1:0/0 = 0
 2:0/0 = 0
@@ -370,7 +369,7 @@ texture = ExtResource("5_jk42d")
 22:2/0 = 0
 23:2/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qa7wf"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k3gst"]
 texture = ExtResource("6_oanmv")
 0:0/0 = 0
 1:0/0 = 0
@@ -497,11 +496,11 @@ texture = ExtResource("6_oanmv")
 
 [sub_resource type="TileSet" id="TileSet_t0upt"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_u5bo4")
-sources/1 = SubResource("TileSetAtlasSource_40xyo")
-sources/2 = SubResource("TileSetAtlasSource_qa7wf")
-sources/13 = SubResource("TileSetAtlasSource_5uchn")
-sources/14 = SubResource("TileSetAtlasSource_70k3q")
+sources/0 = SubResource("TileSetAtlasSource_5uchn")
+sources/1 = SubResource("TileSetAtlasSource_70k3q")
+sources/2 = SubResource("TileSetAtlasSource_k3gst")
+sources/13 = SubResource("TileSetAtlasSource_qa7wf")
+sources/14 = SubResource("TileSetAtlasSource_t0upt")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40xyo"]
 size = Vector2(108, 71)
@@ -511,7 +510,6 @@ size = Vector2(112, 71)
 
 [node name="level1" type="Node2D"]
 position = Vector2(-32, 4)
-script = ExtResource("1_70k3q")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -26.0

@@ -1,15 +1,10 @@
 extends CanvasLayer
 
 @onready var panel = $Panel
-
 @onready var speaker_name = $Panel/MarginContainer/HBoxContainer/VBoxContainer/Label
-
 @onready var text_label = $Panel/MarginContainer/HBoxContainer/VBoxContainer/RichTextLabel
-
 @onready var portrait = $Panel/MarginContainer/HBoxContainer/TextureRect
-
 @onready var continue_label = $Panel/MarginContainer/ContinueLabel
-
 
 @export var text_speed := 0.03  # سرعة ظهور الحروف
 @export var auto_hide_continue := true
@@ -25,6 +20,7 @@ signal dialogue_finished
 signal line_finished
 
 func _ready():
+	layer = 10
 	hide()
 	print("TEXT LABEL =", text_label)
 	
@@ -36,7 +32,6 @@ func _ready():
 	if continue_label:
 		continue_label.text = "▼ Press Space"
 		continue_label.visible = false
-
 
 func _input(event):
 	if not visible:
@@ -50,7 +45,6 @@ func _input(event):
 		elif can_continue:
 			# لو النص خلص، كمّل للسطر اللي بعده
 			_show_next_line()
-
 
 func show_dialogue(dialogue_data: Array, player = null):
 	"""
@@ -77,39 +71,40 @@ func show_dialogue(dialogue_data: Array, player = null):
 	dialogue_started.emit()
 	_show_next_line()
 
-
 func _show_next_line():
 	if dialogue_queue.is_empty():
 		_end_dialogue()
 		return
-
+	
 	can_continue = false
 	if continue_label:
 		continue_label.visible = false
-
+	
 	var line = dialogue_queue.pop_front()
 	print("CURRENT LINE =", line)
-
+	
+	# 🔴 تفعيل/إخفاء الإنذار
+	if line.has("alert") and line["alert"] == true:
+		AlertOverlay.show_alert()
+	else:
+		AlertOverlay.hide_alert()
+	
 	# اسم المتكلم
 	if speaker_name:
 		speaker_name.text = line.get("speaker", "")
-
-	# ✅ الصورة (التعديل المهم)
+	
+	# ✅ الصورة
 	if portrait:
 		if line.has("portrait") and line["portrait"] != null:
 			portrait.texture = line["portrait"]
 			portrait.visible = true
 		else:
 			portrait.visible = false
-
+	
 	# النص
 	current_text = line.get("text", "")
 	print("TEXT =", current_text)
-
 	_type_text()
-
-
-
 
 func _type_text():
 	if not text_label:
@@ -127,7 +122,6 @@ func _type_text():
 	
 	_finish_typing()
 
-
 func _finish_typing():
 	is_typing = false
 	
@@ -141,9 +135,11 @@ func _finish_typing():
 	
 	line_finished.emit()
 
-
 func _end_dialogue():
 	hide()
+	
+	# 🔴 إخفاء الإنذار لما الحوار يخلص
+	AlertOverlay.hide_alert()
 	
 	# رجع حركة اللاعب
 	if player_reference:
@@ -153,7 +149,6 @@ func _end_dialogue():
 			player_reference.control_enabled = true
 	
 	dialogue_finished.emit()
-
 
 func skip_all():
 	"""تخطي كل الحوار"""
