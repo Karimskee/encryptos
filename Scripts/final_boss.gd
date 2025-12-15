@@ -1,11 +1,18 @@
 extends CharacterBody2D
 
+# إشارة عشان لما البوس يموت اللعبة تعرف
+signal boss_died
+
 # --- إعدادات البوس ---
 @export var speed: float = 120.0        # سرعة الجري
 @export var gravity: float = 1200.0
 @export var max_health: int = 15        # 15 ضربة
 @export var damage_amount: int = 2      # ينقص قلبين
 @export var knockback_force_on_player: float = 800.0 # نوك باك قوي
+
+# --- إعدادات الرسوبن (Spawn) ---
+@export var reward_scene: PackedScene  # هنا هنحط ملف الـ .tscn
+@export var spawn_marker: Marker2D     # هنا هنحط الـ Marker2D اللي في المرحلة
 
 # --- إعدادات الهجوم ---
 @export var attack_range: float = 30.0  
@@ -24,6 +31,9 @@ var is_attacking: bool = false
 var is_dead: bool = false
 var is_hurt: bool = false
 
+# (جديد) متغير التحكم في نشاط البوس
+var is_active: bool = false 
+
 func _ready():
 	current_health = max_health
 	player_ref = get_tree().get_first_node_in_group("Player")
@@ -31,21 +41,34 @@ func _ready():
 	sprite.animation_finished.connect(_on_animation_finished)
 	
 	if hitbox:
-		# الربط اللي كان بيعمل المشكلة، دلوقتي الدالة بتاعته موجودة تحت
 		hitbox.body_entered.connect(_on_hitbox_body_entered)
 
 
-# --- دي الدالة اللي كانت ناقصة ---
+# (جديد) دالة لتشغيل البوس بعد الحوار
+func start_battle():
+	is_active = true
+	print("BOSS FIGHT STARTED!")
+
+
 func _on_hitbox_body_entered(body):
 	if body == player_ref and not is_dead:
 		if can_attack and not is_attacking:
 			_start_attack()
-# -----------------------------
 
 
 func _physics_process(delta):
 	if is_dead:
 		return
+	
+	# (جديد) لو البوس مش نشط (لسه في الحوار)، وقف حركته تماماً
+	if not is_active:
+		velocity.x = 0
+		_apply_gravity(delta) # عشان يثبت على الأرض
+		move_and_slide()
+		if sprite.animation != "Idle":
+			sprite.play("Idle")
+		return
+	# -------------------------------------------------------
 	
 	_apply_gravity(delta)
 	
@@ -104,16 +127,12 @@ func _start_attack():
 	# استنى وقت التجهيز (Windup)
 	await get_tree().create_timer(damage_timing).timeout
 	
-	# --- (الحل السحري) تصحيح الاتجاه قبل الضربة ---
-	# لو اللاعب لف ورا البوس أثناء التجهيز، البوس هيلفله فجأة ويضربه
+	# تصحيح الاتجاه قبل الضربة (عشان ميتضربش من ضهره)
 	if player_ref and not is_dead:
 		var dir_to_player = sign(player_ref.global_position.x - global_position.x)
 		if dir_to_player != 0:
-			# تحديث اتجاه الصورة
 			sprite.flip_h = (dir_to_player < 0)
-			# تحديث مكان الهيت بوكس فوراً عشان يلف مع الصورة
 			hitbox.position.x = abs(hitbox.position.x) * dir_to_player
-	# ---------------------------------------------
 	
 	# كمل باقي كود الضرر عادي
 	if is_attacking and not is_dead and player_ref:
@@ -138,24 +157,16 @@ func _on_animation_finished():
 	if sprite.animation == "Attack":
 		is_attacking = false
 		sprite.play("Idle")
-		# الكول داون الطبيعي بعد الهجوم
 		await get_tree().create_timer(attack_cooldown).timeout
 		can_attack = true
 		
 	elif sprite.animation == "Hurt":
 		is_hurt = false
-		is_attacking = false # تأكيد إن الهجوم وقف
-		
-		# --- (التصليح السحري) ---
-		# بما إنه خلص وجع، خليه يقدر يضرب تاني علطول
-		# أو ممكن تعمل تايمر صغير لو عاوزه ياخد وقت عشان يستوعب
-		can_attack = true 
-		# -----------------------
-		
+		is_attacking = false 
+		can_attack = true # يقدر يضرب تاني علطول بعد الوجع
 		sprite.play("Idle")
 		
 	elif sprite.animation == "Dead":
-		# لو مات متعملش حاجة
 		pass
 
 
@@ -170,13 +181,6 @@ func take_damage(attacker_pos: Vector2):
 	else:
 		is_hurt = true
 		is_attacking = false 
-		
-		# --- ضيف السطر ده ---
-		# لو انضرب وهو بيجهز يضرب، الغي الكول داون عشان لما يفوق يهاجمك بشراسة
-		# ده هيخلي المعركة حماسية أكتر
-		# can_attack = false # (اختياري: لو شلت السطر ده هيعتمد على إنهاء انيميشن Hurt)
-		# ------------------
-
 		sprite.play("Hurt")
 		
 		var knock_dir = sign(global_position.x - attacker_pos.x)
@@ -187,7 +191,23 @@ func take_damage(attacker_pos: Vector2):
 func die():
 	is_dead = true
 	velocity = Vector2.ZERO
-	set_collision_layer_value(1, false)
+	
+	set_collision_layer_value(3, false)
 	set_collision_mask_value(1, false)
+	
+	if hitbox:
+		hitbox.set_collision_mask_value(2, false)
+	
 	sprite.play("Dead")
+	
+	# ظهور السبيريت/المكافأة
+	if reward_scene and spawn_marker:
+		var reward_instance = reward_scene.instantiate()
+		reward_instance.global_position = spawn_marker.global_position
+		get_parent().add_child(reward_instance)
+	
+	# إرسال إشارة موت البوس
+	boss_died.emit()
+	print("Boss died!")
+	
 	await sprite.animation_finished

@@ -1,6 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://ce11avpskto5w"]
+[gd_scene load_steps=17 format=3 uid="uid://ce11avpskto5w"]
 
 [ext_resource type="PackedScene" uid="uid://csiad1xnelatm" path="res://Scens/player.tscn" id="1_66tkf"]
+[ext_resource type="Script" uid="uid://bkdltxqww3kcc" path="res://Scripts/final_level.gd" id="1_wymvv"]
+[ext_resource type="PackedScene" uid="uid://dwda8gn52ruft" path="res://Scens/Reward.tscn" id="2_b0dwp"]
 [ext_resource type="Texture2D" uid="uid://gnd76pyavpia" path="res://assets/Tileset/Tileset.png" id="2_nojwv"]
 [ext_resource type="Texture2D" uid="uid://cyrvs4dglq1q2" path="res://assets/Tileset/Tileset_Borders.png" id="3_ntahq"]
 [ext_resource type="Texture2D" uid="uid://1lwm5r57wbin" path="res://assets/Traps/Trap5.png" id="4_b0dwp"]
@@ -504,6 +506,7 @@ sources/13 = SubResource("TileSetAtlasSource_rhcoy")
 sources/14 = SubResource("TileSetAtlasSource_wiksf")
 
 [node name="final_level" type="Node2D"]
+script = ExtResource("1_wymvv")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -26.0
@@ -514,9 +517,11 @@ size_flags_horizontal = 0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Final_boss" parent="." instance=ExtResource("7_nojwv")]
+[node name="Final_boss" parent="." node_paths=PackedStringArray("spawn_marker") instance=ExtResource("7_nojwv")]
 position = Vector2(230, 168)
 damage_amount = 1
+reward_scene = ExtResource("2_b0dwp")
+spawn_marker = NodePath("../RewardSpawnPoint")
 attack_cooldown = 0.5
 damage_timing = 0.6
 
@@ -543,3 +548,6 @@ layer_2/tile_data = PackedInt32Array(851978, 393216, 6, 917514, 393216, 6, 98305
 [node name="Health UI" parent="." instance=ExtResource("8_ntahq")]
 scale = Vector2(1.5, 1.5)
 transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
+
+[node name="RewardSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(751, 178)

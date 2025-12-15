@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwda8gn52ruft"]
+
+[ext_resource type="Script" uid="uid://dcul675h2sc11" path="res://Scripts/reward.gd" id="1_26uk2"]
+[ext_resource type="Texture2D" uid="uid://fuasmlsgbiqe" path="res://assets/image.png" id="1_sgw4a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26uk2"]
+size = Vector2(84.054794, 84)
+
+[node name="Reward" type="Area2D"]
+scale = Vector2(0.365, 0.365)
+collision_mask = 2
+script = ExtResource("1_26uk2")
+
+[node name="Image" type="Sprite2D" parent="."]
+position = Vector2(7.6293945e-06, 1.0000038)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_sgw4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-10.027395, 2.9999995)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_26uk2")
+debug_color = Color(0.69695014, 0.49446118, 0, 0.41960785)

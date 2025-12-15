@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Transition="*res://Scens/transition.tscn"
 DialogueBox="*res://Scens/dialogue_box.tscn"
 AlertOverlay="*res://Scens/alert_overlay.tscn"
+GameManager="*res://Scripts/GameManager.gd"
 
 [display]
 
