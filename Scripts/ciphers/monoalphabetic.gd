@@ -1,7 +1,7 @@
 class_name Monoalphabetic
 extends Node
 
-# 🔒 ENCRYPTION
+# ENCRYPTION
 # Key must be a 26-character string representing the shuffled alphabet
 # Example Key: "QWERTYUIOPASDFGHJKLZXCVBNM"
 static func encrypt(key_string: Variant, text: String) -> String:
@@ -33,7 +33,7 @@ static func encrypt(key_string: Variant, text: String) -> String:
 			
 	return buffer.get_string_from_utf8()
 
-# 🔓 DECRYPTION
+# DECRYPTION
 static func decrypt(key_string: Variant, text: String) -> String:
 	key_string = str(key_string)
 	

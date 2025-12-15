@@ -1,7 +1,7 @@
 class_name Hill
 extends Node
 
-# 🔒 ENCRYPTION
+# ENCRYPTION
 # Key MUST be exactly 4 characters long (for a 2x2 matrix)
 static func encrypt(key: String, text: String) -> String:
 	var matrix = _key_to_matrix(key)
@@ -25,7 +25,7 @@ static func encrypt(key: String, text: String) -> String:
 		
 	return result
 
-# 🔓 DECRYPTION
+# DECRYPTION
 static func decrypt(key: String, text: String) -> String:
 	var matrix = _key_to_matrix(key)
 	if matrix.is_empty(): return ""
