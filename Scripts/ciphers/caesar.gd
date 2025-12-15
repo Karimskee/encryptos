@@ -49,3 +49,8 @@ static func decrypt(key: int, text: String) -> String:
 			buffer[i] = val + 97
 			
 	return buffer.get_string_from_utf8()
+
+
+static func generate_random_key() -> int:
+	# Returns a shift between 1 and 25
+	return randi_range(1, 25)

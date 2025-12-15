@@ -3,6 +3,9 @@ extends Node
 
 # 🔒 ENCRYPTION
 # Logic: (PlainChar + KeyChar) % 26
+# This OneTimePad approach ghosts the non alphabetic PlainChars' KeyChars
+# Online OneTimePad approaches ignores the non alphabetic PlainChars, passing
+# their KeyChar to the next PlainChar
 static func encrypt(key: String, text: String) -> String:
 	var buffer: PackedByteArray = text.to_utf8_buffer()
 	var key_buffer: PackedByteArray = key.to_upper().to_utf8_buffer()
@@ -55,14 +58,9 @@ static func decrypt(key: String, text: String) -> String:
 			
 	return buffer.get_string_from_utf8()
 
-# 🎲 HELPER: GENERATE RANDOM KEY
-# Since OTP requires a random key of specific length, this helper is essential for your game UI.
+
 static func generate_random_key(length: int) -> String:
-	var result = PackedByteArray()
-	result.resize(length)
-	
+	var result = ""
 	for i in range(length):
-		# Random ASCII between 65 (A) and 90 (Z)
-		result[i] = randi_range(65, 90)
-		
-	return result.get_string_from_utf8()
+		result += String.chr(randi_range(65, 90)) # A-Z
+	return result

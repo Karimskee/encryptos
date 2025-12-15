@@ -70,3 +70,16 @@ static func decrypt(key_string: Variant, text: String) -> String:
 			buffer[i] = inverse_map[index] + 32
 			
 	return buffer.get_string_from_utf8()
+
+
+static func generate_random_key() -> String:
+	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split()
+	var array = []
+	for c in alphabet: array.append(c) # Convert to Array for shuffling
+	
+	array.shuffle()
+	
+	var result = ""
+	for char in array:
+		result += char
+	return result

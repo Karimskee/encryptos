@@ -201,3 +201,13 @@ static func get_expected_playfair_output(original_text: String) -> String:
 		expected += char_a + char_b
 		
 	return expected
+
+
+static func generate_random_key() -> String:
+	# Playfair keys work best with a bit of length to fill the grid
+	var length = randi_range(6, 10)
+	
+	var result = ""
+	for i in range(length):
+		result += String.chr(randi_range(65, 90))
+	return result

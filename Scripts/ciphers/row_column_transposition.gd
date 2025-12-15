@@ -122,3 +122,12 @@ static func get_column_order(key: String) -> Array:
 		result.append(item["id"])
 		
 	return result
+
+
+static func generate_random_key(length: int = 0) -> String:
+	if length == 0: length = randi_range(5, 8)
+	
+	var result = ""
+	for i in range(length):
+		result += String.chr(randi_range(65, 90))
+	return result

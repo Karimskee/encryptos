@@ -4,7 +4,7 @@ extends Node
 # Global variables
 # some plan texts to use
 # "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 1234567890 !@#$%^&*()_+-=~,./;:'\"[]{}<>"
-var plain_text = "Karim is 3azim!"
+var plain_text = "Karimisazim!"
 
 var key_int = 3
 var key_string_alpha_perm = "BACDEFGHIJKLMNOPQRSTUVWXYZ"

@@ -74,3 +74,13 @@ static func decrypt(key: String, text: String) -> String:
 			key_idx += 1
 			
 	return buffer.get_string_from_utf8()
+
+
+static func generate_random_key(length: int = 0) -> String:
+	# If no length provided, pick random between 4 and 8
+	if length == 0: length = randi_range(4, 8)
+	
+	var result = ""
+	for i in range(length):
+		result += String.chr(randi_range(65, 90))
+	return result

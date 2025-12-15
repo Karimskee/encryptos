@@ -123,23 +123,23 @@ static func _mod_inverse(a: int, m: int) -> int:
 			return x
 	return -1 # No inverse exists (Key is invalid)
 
-# Call this from your UI when the user types a key
-static func is_key_valid(key: String) -> bool:
-	var matrix = _key_to_matrix(key)
-	
-	# 1. Check length
-	if matrix.is_empty(): 
-		return false
-		
-	# 2. Calculate Determinant
-	var det = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
-	
-	# 3. Check if Determinant has an inverse mod 26
-	# We reuse the existing _mod_inverse helper
-	if _mod_inverse(det, 26) == -1:
-		return false # Invalid
-		
-	return true # Valid!
+## Call this from your UI when the user types a key
+#static func is_key_valid(key: String) -> bool:
+	#var matrix = _key_to_matrix(key)
+	#
+	## 1. Check length
+	#if matrix.is_empty(): 
+		#return false
+		#
+	## 2. Calculate Determinant
+	#var det = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+	#
+	## 3. Check if Determinant has an inverse mod 26
+	## We reuse the existing _mod_inverse helper
+	#if _mod_inverse(det, 26) == -1:
+		#return false # Invalid
+		#
+	#return true # Valid!
 	
 	
 static func generate_valid_key() -> String:
@@ -178,3 +178,24 @@ static func get_expected_hill_output(original_text: String) -> String:
 		clean += "X"
 		
 	return clean
+
+
+# Place inside HillCipher class
+static func generate_random_key() -> String:
+	# Keep trying until we find a mathematically valid key
+	while true:
+		var candidate = ""
+		for i in range(4): # 2x2 Matrix requires 4 chars
+			candidate += String.chr(randi_range(65, 90))
+			
+		if is_key_valid(candidate):
+			return candidate
+			
+	return "HILL" # Fallback
+
+# Helper to check validity (if you don't have it yet)
+static func is_key_valid(key: String) -> bool:
+	var matrix = _key_to_matrix(key)
+	if matrix.is_empty(): return false
+	var det = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+	return _mod_inverse(det, 26) != -1

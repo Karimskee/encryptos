@@ -99,3 +99,7 @@ static func decrypt(rails: int, text: String) -> String:
 		row += 1 if going_down else -1
 		
 	return result
+
+
+static func generate_random_key() -> int:
+	return randi_range(2, 5)
