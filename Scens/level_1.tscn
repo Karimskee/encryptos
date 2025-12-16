@@ -13,8 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="6_oanmv"]
 [ext_resource type="Script" uid="uid://dmypm1ibiskyr" path="res://Scripts/strat_game.gd" id="11_u5bo4"]
 [ext_resource type="Script" uid="uid://bna7lf5je2u6s" path="res://Scripts/traning.gd" id="12_40xyo"]
+[ext_resource type="PackedScene" uid="uid://clqale5qwhkbu" path="res://Scens/dialogue_box.tscn" id="14_qa7wf"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5bo4"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5uchn"]
 texture = ExtResource("2_8fnge")
 0:0/0 = 0
 1:0/0 = 0
@@ -184,7 +185,7 @@ texture = ExtResource("2_8fnge")
 7:13/0 = 0
 8:13/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_40xyo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70k3q"]
 texture = ExtResource("3_4j7iv")
 0:0/0 = 0
 1:0/0 = 0
@@ -303,10 +304,10 @@ texture = ExtResource("3_4j7iv")
 7:12/0 = 0
 8:12/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5uchn"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qa7wf"]
 texture = ExtResource("4_en8a6")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70k3q"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t0upt"]
 texture = ExtResource("5_jk42d")
 1:0/0 = 0
 2:0/0 = 0
@@ -369,7 +370,7 @@ texture = ExtResource("5_jk42d")
 22:2/0 = 0
 23:2/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qa7wf"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k3gst"]
 texture = ExtResource("6_oanmv")
 0:0/0 = 0
 1:0/0 = 0
@@ -496,11 +497,11 @@ texture = ExtResource("6_oanmv")
 
 [sub_resource type="TileSet" id="TileSet_t0upt"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_u5bo4")
-sources/1 = SubResource("TileSetAtlasSource_40xyo")
-sources/2 = SubResource("TileSetAtlasSource_qa7wf")
-sources/13 = SubResource("TileSetAtlasSource_5uchn")
-sources/14 = SubResource("TileSetAtlasSource_70k3q")
+sources/0 = SubResource("TileSetAtlasSource_5uchn")
+sources/1 = SubResource("TileSetAtlasSource_70k3q")
+sources/2 = SubResource("TileSetAtlasSource_k3gst")
+sources/13 = SubResource("TileSetAtlasSource_qa7wf")
+sources/14 = SubResource("TileSetAtlasSource_t0upt")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40xyo"]
 size = Vector2(108, 71)
@@ -512,10 +513,11 @@ size = Vector2(112, 71)
 position = Vector2(-32, 4)
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -38.0
-offset_top = -75.0
-offset_right = 1732.0
-offset_bottom = 1071.0
+offset_left = -26.0
+offset_top = -74.0
+offset_right = 1744.0
+offset_bottom = 1072.0
+size_flags_horizontal = 0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -610,6 +612,8 @@ script = ExtResource("12_40xyo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Traning"]
 position = Vector2(7, -3.5)
 shape = SubResource("RectangleShape2D_5uchn")
+
+[node name="DialogueBox" parent="." instance=ExtResource("14_qa7wf")]
 
 [node name="Ciphers" type="Node" parent="."]
 script = ExtResource("4_v7cy7")

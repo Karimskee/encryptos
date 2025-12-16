@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Transition="*res://Scens/transition.tscn"
+DialogueBox="*res://Scens/dialogue_box.tscn"
+AlertOverlay="*res://Scens/alert_overlay.tscn"
 
 [display]
 

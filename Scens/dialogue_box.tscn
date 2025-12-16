@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://clqale5qwhkbu"]
+
+[ext_resource type="Script" uid="uid://bie4rd7cvylrx" path="res://Scripts/dialogue_box.gd" id="1_kxe07"]
+[ext_resource type="Texture2D" uid="uid://dmhk17gs1fx4r" path="res://assets/Character/h1.png" id="2_i1c4p"]
+[ext_resource type="FontFile" uid="uid://dix81qiivvxwq" path="res://Fonts/Arabic Pixel 2.ttf" id="3_i1c4p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1c4p"]
+bg_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+border_width_top = 10
+border_color = Color(0.8978127, 0.8978128, 0.89781255, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+
+[node name="DialogueBox" type="CanvasLayer"]
+script = ExtResource("1_kxe07")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -950.0
+offset_top = -243.0
+offset_right = 962.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_i1c4p")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 141.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("2_i1c4p")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_i1c4p")
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1672.345, 150)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_i1c4p")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+horizontal_alignment = 2
+vertical_alignment = 1

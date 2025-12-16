@@ -1,7 +1,13 @@
-[gd_scene load_steps=44 format=3 uid="uid://csiad1xnelatm"]
+[gd_scene load_steps=54 format=3 uid="uid://csiad1xnelatm"]
 
 [ext_resource type="Script" uid="uid://cr5mpq3c5f0cf" path="res://Scripts/player.gd" id="1_4tq17"]
 [ext_resource type="Texture2D" uid="uid://bfgbnm0nuorcj" path="res://assets/Character/Adventure_Character_Simple.png" id="2_y1jf2"]
+[ext_resource type="AudioStream" uid="uid://dut2pueurrfhm" path="res://assets/sounds/run-fast-345728.mp3" id="3_bngc5"]
+[ext_resource type="AudioStream" uid="uid://dfeibtfon40c7" path="res://assets/sounds/sword-sound-260274.mp3" id="4_nw0oj"]
+[ext_resource type="AudioStream" uid="uid://bkp5p8kmlihbi" path="res://assets/sounds/slap-hurt-pain-sound-effect-262618.mp3" id="5_inxhq"]
+[ext_resource type="AudioStream" uid="uid://cm4tqwy11bvkn" path="res://assets/sounds/mario-death-sound-effect-hd-1080-publer.io.mp3" id="6_inxhq"]
+[ext_resource type="AudioStream" uid="uid://cic0faiaf8dlt" path="res://assets/sounds/blox-fruits-dash-sound-effect-1080-publer.io.mp3" id="7_ft64u"]
+[ext_resource type="Texture2D" uid="uid://gnqmxh2c0rsp" path="res://assets/Smoke FX Lite Zip 5.25.23/SmokeFX Lite SpriteSheet 2A-1.png" id="8_ft64u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_or86s"]
 atlas = ExtResource("2_y1jf2")
@@ -383,6 +389,25 @@ size = Vector2(15.5, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1jf2"]
 size = Vector2(16, 20)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ft64u"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_ft64u"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1vbgy"]
+gradient = SubResource("Gradient_ft64u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ft64u"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_1vbgy")
+anim_speed_min = 5.99
+anim_speed_max = 5.99
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_4tq17")
 speed = 150.0
@@ -390,10 +415,8 @@ jump_force = 350.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v5l7k")
-animation = &"Dead"
+animation = &"Run"
 autoplay = "Idle"
-frame = 6
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
@@ -405,3 +428,29 @@ shape = SubResource("RectangleShape2D_dkxhe")
 position = Vector2(8, -1)
 shape = SubResource("RectangleShape2D_y1jf2")
 debug_color = Color(0.99301606, 0, 0.25041574, 0.41960785)
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Run" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("3_bngc5")
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("4_nw0oj")
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("5_inxhq")
+
+[node name="Dead" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("6_inxhq")
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("7_ft64u")
+
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_ft64u")
+position = Vector2(-13, -4)
+emitting = false
+texture = ExtResource("8_ft64u")
+lifetime = 0.4
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_ft64u")
