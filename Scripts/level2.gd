@@ -84,7 +84,6 @@ func _update_ui_counts():
 		$CanvasLayer/Control/HBoxContainer/BtnReset.disabled = (resets_left <= 0)
 
 
-
 func _ready():
 	randomize()
 	$CanvasLayer/Control/HBoxContainer/BtnSubmit.pressed.connect(_on_submit)
@@ -99,18 +98,18 @@ func _start_new_round():
 	# اختار جملة عشوائية
 	plaintext_default = plaintext_pool[randi() % plaintext_pool.size()]
 	# اختياري: تطبع في الـ Output لأغراض الديباغ
-	print(">>> PLAINTEXT:", plaintext_default)
+	print("Plain text :", plaintext_default)
 
 	# القائمة بالترتيب اللي طلبته بالظبط
 	var choices = [
 		"Caesar",
-		"Playfair",
-		"Hill",
 		"Mono",
-		"Poly",
 		"One-Time Pad",
+		"Poly",
 		"Rail Fence",
-		"Row Column Transposition"
+		"Row Column Transposition",
+		"Playfair",
+		"Hill"
 	]
 
 	if cipher_choice == "random":
@@ -120,49 +119,56 @@ func _start_new_round():
 
 	match current_cipher_name:
 		"Caesar":
-			var k = randi() % 25 + 1
+			var k = Caesar.generate_random_key()
 			current_key = str(k)
-			ciphertext = _caesar_encrypt(plaintext_default, k)
+			ciphertext = Caesar.encrypt(k, plaintext_default)
+			plaintext_default = Caesar.decrypt(k, ciphertext)
 
 		"Playfair":
-			var keyphrase = _random_word(int(randi() % 5) + 4)
+			var keyphrase = Playfair.generate_random_key()
 			current_key = keyphrase
-			ciphertext = _playfair_encrypt(plaintext_default, keyphrase)
+			ciphertext = Playfair.encrypt(keyphrase, plaintext_default)
+			plaintext_default = Playfair.decrypt(keyphrase, ciphertext)
 
 		"Hill":
-			var key2x2 = _hill_generate_key()
-			current_key = _hill_key_to_string(key2x2)
-			ciphertext = _hill_encrypt(plaintext_default, key2x2)
+			var key2x2 = Hill.generate_random_key()
+			current_key = key2x2
+			ciphertext = Hill.encrypt(key2x2, plaintext_default)
+			plaintext_default = Hill.decrypt(key2x2, ciphertext)
 
 		"Monoalphabetic":
-			var map = _mono_generate_map()
-			current_key = _mono_map_to_string(map)
-			ciphertext = _mono_encrypt(plaintext_default, map)
+			var map = Monoalphabetic.generate_random_key()
+			current_key = map
+			ciphertext = Monoalphabetic.encrypt(map, plaintext_default)
+			plaintext_default = Monoalphabetic.decrypt(map, ciphertext)
 
 		"Polyalphabetic":
-			var klen = int(randi() % 6) + 5
-			var k = ""
-			for i in range(klen):
-				k += ALPHABET[randi() % 26]
-			current_key = k
-			ciphertext = _vigenere_encrypt(plaintext_default, k)
+			var klen = Polyalphabetic.generate_random_key()
+			current_key = klen
+			ciphertext = Polyalphabetic.encrypt(klen, plaintext_default)
+			plaintext_default = Polyalphabetic.decrypt(klen, ciphertext)
 
 		"One-Time Pad":
-			var pad = _generate_pad(plaintext_default.length())
-			current_key = _pad_to_string(pad)
-			ciphertext = _otp_encrypt(plaintext_default, pad)
+			var pad = OneTimePad.generate_random_key(plaintext_default.length())
+			current_key = pad
+			ciphertext = OneTimePad.encrypt(pad, plaintext_default)
+			plaintext_default = OneTimePad.decrypt(pad, ciphertext)
 
 		"Rail Fence":
-			var depth = (randi() % 4) + 2
+			var depth = RailFence.generate_random_key()
 			current_key = str(depth)
-			ciphertext = _rail_fence_encrypt(plaintext_default, depth)
+			ciphertext = RailFence.encrypt(depth, plaintext_default)
+			plaintext_default = RailFence.decrypt(depth, ciphertext)
 
 		"Row Column Transposition":
-			var cols = (randi() % 5) + 3
-			var order = _random_permutation(cols)
-			current_key = _permutation_to_string(order)
-			ciphertext = _columnar_encrypt(plaintext_default, order)
-
+			var cols = RowColumnTransposition.generate_random_key()
+			current_key = cols
+			ciphertext = RowColumnTransposition.encrypt(cols, plaintext_default)
+			plaintext_default = RowColumnTransposition.decrypt(cols, ciphertext)
+	
+	print("Cipher text: " + ciphertext)
+	print("Decrypted text: " + plaintext_default)
+	print()
 	# تحديث UI
 	$CanvasLayer/Control/LabelCipherName.text = "Cipher: " + current_cipher_name
 	$CanvasLayer/Control/LabelCipher.text = "Ciphertext: " + ciphertext
@@ -200,8 +206,6 @@ func _on_submit():
 		else:
 			_start_new_round()
 			return
-
-
 
 
 func _on_reset():
@@ -336,19 +340,28 @@ func _otp_encrypt(text: String, pad: PackedInt32Array) -> String:
 func _rail_fence_encrypt(text: String, depth: int) -> String:
 	if depth <= 1:
 		return text
+	
 	var rails := []
 	for i in range(depth):
 		rails.append("")
+		
 	var rail = 0
-	var dir = 1
+	var dir = 1 # 1 for down, -1 for up
+	
 	for c in text:
-		rails[rail] += c
-		rail += dir
+		# Check boundary *before* adding the character and update direction
+		# If we hit the top rail (index 0) OR the bottom rail (index depth - 1)
 		if rail == 0:
-			dir = 1
-		elif rail == depth:
-			rail = depth - 2
-			dir = -1
+			dir = 1  # Must go down
+		elif rail == depth - 1:
+			dir = -1 # Must go up
+			
+		# Place the character on the rail
+		rails[rail] += c
+		
+		# Move to the next rail
+		rail += dir
+		
 	var out := ""
 	for r in rails:
 		out += r

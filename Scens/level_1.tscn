@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://72556q47ij4w" path="res://assets/keys/pxkw_d.png" id="3_40xyo"]
 [ext_resource type="Texture2D" uid="uid://bmudry4157rf5" path="res://assets/keys/pxkw_space_2.png" id="4_5uchn"]
 [ext_resource type="Texture2D" uid="uid://1lwm5r57wbin" path="res://assets/Traps/Trap5.png" id="4_en8a6"]
+[ext_resource type="Script" uid="uid://p6ap57wpbdo3" path="res://Scripts/ciphers/test_ciphers.gd" id="4_v7cy7"]
 [ext_resource type="Texture2D" uid="uid://bhfvxsmh27wqe" path="res://assets/Traps/Trap4.png" id="5_jk42d"]
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="6_oanmv"]
 [ext_resource type="Script" uid="uid://dmypm1ibiskyr" path="res://Scripts/strat_game.gd" id="11_u5bo4"]
@@ -613,6 +614,9 @@ position = Vector2(7, -3.5)
 shape = SubResource("RectangleShape2D_5uchn")
 
 [node name="DialogueBox" parent="." instance=ExtResource("14_qa7wf")]
+
+[node name="Ciphers" type="Node" parent="."]
+script = ExtResource("4_v7cy7")
 
 [connection signal="body_entered" from="strat_game" to="strat_game" method="_on_body_entered"]
 [connection signal="body_entered" from="Traning" to="Traning" method="_on_body_entered"]
