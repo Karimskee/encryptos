@@ -10,13 +10,18 @@ extends CharacterBody2D
 
 @export var knockback_force: float = 400.0
 @export var attack_damage: int = 1
-@export var attack_area_offset: float = 40.0
+@export var attack_area_offset: float = 30.0
 
 # Health System
 @export var max_health: int = 5
 var current_health: int = 5
 
 var is_knocked_back := false
+
+# Shield System
+@export var max_shield_durability: int = 6 # عدد المحاولات (6)
+var current_shield_durability: int = 6
+var is_blocking: bool = false
 
 # grace times (seconds)
 @export var coyote_time: float = 0.12
@@ -43,7 +48,6 @@ var is_knocked_back := false
 # -----------------------------
 
 # --- تعريف نود البارتكلز للداش ---
-# سمي النود DashParticles وحط فيها السبيريت شيت
 @onready var dash_particles: GPUParticles2D = $DashParticles
 # --------------------------------
 
@@ -73,9 +77,13 @@ signal player_died
 func respown():
 	self.global_position = Vector2(106, 213)
 	current_health = max_health
+	# إعادة ملء الدرع عند الريسبون
+	current_shield_durability = max_shield_durability 
+	
 	is_dead = false
 	control_enabled = true
 	is_knocked_back = false
+	is_blocking = false
 	velocity = Vector2.ZERO
 	
 	set_collision_layer_value(1, true)
@@ -94,9 +102,9 @@ func respown():
 
 
 func _ready() -> void:
-	
 	jumps_left = max_jumps
 	current_health = max_health
+	current_shield_durability = max_shield_durability
 	
 	if sprite:
 		sprite.animation_finished.connect(_on_animation_finished)
@@ -113,6 +121,16 @@ func _physics_process(delta: float) -> void:
 		if sfx_run and sfx_run.playing:
 			sfx_run.stop()
 		return
+	
+	# --- منطق الدرع (Block Logic) ---
+	# الشرط: دايس كليك يمين + على الأرض + مش بيضرب + مش بيعمل داش + معاه درع
+	if Input.is_action_pressed("Block") and is_on_floor() and not is_attacking and not is_dashing and current_shield_durability > 0:
+		if not is_blocking:
+			is_blocking = true
+			velocity.x = 0 
+	else:
+		if is_blocking:
+			is_blocking = false
 	
 	if is_playing_enter_animation:
 		enter_animation_timer -= delta
@@ -157,31 +175,36 @@ func _physics_process(delta: float) -> void:
 		_update_animation()
 		return
 	
+	# --- Input Movement ---
 	var input_dir: float = 0.0
-	if control_enabled and not is_attacking:
+	# ضفنا شرط (not is_blocking) عشان اللاعب مايمشيش وهو رافع الدرع
+	if control_enabled and not is_attacking and not is_blocking:
 		input_dir = Input.get_axis("Left", "Right")
 	
-	if control_enabled and not is_attacking and not is_dashing and Input.is_action_just_pressed("Dash"):
+	# --- Dash Input ---
+	if control_enabled and not is_attacking and not is_dashing and not is_blocking and Input.is_action_just_pressed("Dash"):
 		if dash_cooldown_timer <= 0.0:
 			_start_dash()
 	
-	if control_enabled and not is_attacking and not is_dashing and Input.is_action_just_pressed("Attack"):
+	# --- Attack Input ---
+	if control_enabled and not is_attacking and not is_dashing and not is_blocking and Input.is_action_just_pressed("Attack"):
 		_start_attack()
 	
 	var target_x := input_dir * speed
 	var change_rate := accel if abs(target_x) > abs(velocity.x) else deccel
 	velocity.x = move_toward(velocity.x, target_x, change_rate * delta)
 	
-	if not is_attacking and not is_dashing:
+	if not is_attacking and not is_dashing and not is_blocking:
 		if input_dir > 0.0 and not facing_right:
 			_flip(true)
 		elif input_dir < 0.0 and facing_right:
 			_flip(false)
 	
-	if control_enabled and not is_attacking and not is_dashing and Input.is_action_just_pressed("ui_accept"):
+	# --- Jump Input ---
+	if control_enabled and not is_attacking and not is_dashing and not is_blocking and Input.is_action_just_pressed("ui_accept"):
 		jump_buffer_timer = jump_buffer_time
 	
-	if jump_buffer_timer > 0.0 and not is_attacking and not is_dashing:
+	if jump_buffer_timer > 0.0 and not is_attacking and not is_dashing and not is_blocking:
 		if coyote_timer > 0.0 and jumps_left > 0:
 			_do_jump()
 			jump_buffer_timer = 0.0
@@ -191,10 +214,10 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	# --- منطق تشغيل الصوت ---
+	# --- Sound Logic ---
 	var is_moving = abs(velocity.x) > 10.0
 	if sfx_run:
-		if is_on_floor() and is_moving and not is_dashing and not is_attacking:
+		if is_on_floor() and is_moving and not is_dashing and not is_attacking and not is_blocking:
 			if not sfx_run.playing:
 				sfx_run.play()
 		else:
@@ -216,13 +239,9 @@ func _flip(face_right: bool) -> void:
 		sprite.flip_h = not facing_right
 	_update_attack_area_position()
 	
-	# بنغير مكان البارتكلز عشان تطلع ورا ضهر اللاعب
 	if dash_particles:
-		# لو البارتكلز ليها Offset، نعكسه
-		# أو ممكن نستخدم Scale.x = -1
 		if face_right:
 			dash_particles.position.x = -abs(dash_particles.position.x)
-			# لو السبيريت شيت ليه اتجاه، ممكن تحتاج تعكس الـ scale بتاع البارتكلز:
 			dash_particles.scale.x = 1 
 		else:
 			dash_particles.position.x = abs(dash_particles.position.x)
@@ -280,12 +299,9 @@ func _start_dash() -> void:
 	if sfx_dash:
 		sfx_dash.play()
 		
-	# --- تشغيل بارتكلز الداش ---
 	if dash_particles:
-		# بنعمل restart عشان يعيد التشغيل حتى لو كان لسه مخلصش
 		dash_particles.restart()
 		dash_particles.emitting = true
-	# -------------------------
 
 
 func _on_animation_finished() -> void:
@@ -306,6 +322,7 @@ func take_damage_no_knockback() -> void:
 	if is_dead:
 		return
 	
+	# ممكن نضيف فحص للدرع هنا برضو لو حابب، بس حاليا هنسيبها للضرر المباشر
 	current_health -= 1
 	health_changed.emit(current_health, max_health)
 	
@@ -316,42 +333,88 @@ func take_damage_no_knockback() -> void:
 		die()
 
 
-func apply_knockback(enemy_position: Vector2) -> void:
-	if is_dead:
-		return
+func apply_knockback(enemy_position: Vector2, force_override: float = -1) -> void:
+	if is_dead: return
+	
+	# --- منطق الدرع والاتجاه ---
+	var direction_to_enemy = sign(enemy_position.x - global_position.x)
+	var my_facing = 1 if facing_right else -1
+	
+	# لو رافع الدرع + العدو قدام وشي + لسه معايا درع
+	if is_blocking and direction_to_enemy == my_facing and current_shield_durability > 0:
+		current_shield_durability -= 1
+		print("Blocked! Shield left: ", current_shield_durability)
+		
+		# Recoil effect
+		velocity.x = -my_facing * 100 
+		
+		if current_shield_durability <= 0:
+			is_blocking = false
+			print("Shield Broken!")
+		return 
+	# ------------------
 	
 	current_health -= 1
-	print("Player health: ", current_health)
 	health_changed.emit(current_health, max_health)
 	
-	if sfx_hurt:
-		sfx_hurt.play()
-	
-	if is_attacking and not attack_hit_registered:
-		_check_attack_hit()
+	if sfx_hurt: sfx_hurt.play()
 	
 	if current_health <= 0:
 		die()
 		return
 	
-	var knockback_direction = sign(global_position.x - enemy_position.x)
-	if knockback_direction == 0:
-		knockback_direction = 1
+	var knockback_force_val = knockback_force
+	if force_override > 0: knockback_force_val = force_override
+	
+	var knockback_direction = -direction_to_enemy
+	if knockback_direction == 0: knockback_direction = -my_facing
 	
 	is_knocked_back = true
-	velocity.x = knockback_direction * knockback_force
-	velocity.y = -knockback_force * 0.4
+	velocity.x = knockback_direction * knockback_force_val
+	velocity.y = -knockback_force_val * 0.4
 	
 	control_enabled = false
 	is_attacking = false
 	is_dashing = false
+	is_blocking = false
 	
-	if sprite:
-		sprite.play("Hurt")
+	if sprite: sprite.play("Hurt")
 
 
 func take_damage(enemy_position: Vector2 = Vector2.ZERO) -> void:
 	apply_knockback(enemy_position)
+
+
+# --- دالة تلقي ضربة البوس (مع الدرع) ---
+func take_boss_damage(dmg_amount: int, boss_pos: Vector2, force: float):
+	if is_dead: return
+	
+	var direction_to_enemy = sign(boss_pos.x - global_position.x)
+	var my_facing = 1 if facing_right else -1
+	
+	# منطق صد البوس (بيخصم 2 من الدرع)
+	if is_blocking and direction_to_enemy == my_facing and current_shield_durability > 0:
+		current_shield_durability -= 1
+		print("Boss Blocked! Shield left: ", current_shield_durability)
+		velocity.x = -my_facing * 300 
+		return
+	
+	# لو مفيش صد
+	current_health -= dmg_amount
+	health_changed.emit(current_health, max_health)
+	
+	var dir = sign(global_position.x - boss_pos.x)
+	if dir == 0: dir = 1
+	
+	is_knocked_back = true
+	velocity.x = dir * force
+	velocity.y = -force * 0.5
+	
+	is_blocking = false
+	if sprite: sprite.play("Hurt")
+	
+	if current_health <= 0:
+		die()
 
 
 func heal(amount: int) -> void:
@@ -372,6 +435,7 @@ func die():
 	is_knocked_back = false
 	is_attacking = false
 	is_dashing = false
+	is_blocking = false
 	velocity = Vector2.ZERO
 	
 	set_collision_layer_value(1, false)
@@ -413,6 +477,13 @@ func _update_animation() -> void:
 		if sprite.animation != "Hurt":
 			sprite.play("Hurt")
 		return
+		
+	# --- تعديل مهم: أنيميشن البلوك ---
+	if is_blocking:
+		if sprite.animation != "Block":
+			sprite.play("Block")
+		return # اخرج من الدالة عشان Idle ميشتغلش فوقها
+	# -----------------------------
 	
 	if is_dashing:
 		if sprite.animation != "Dash":
