@@ -1,43 +1,103 @@
-[gd_scene load_steps=7 format=3 uid="uid://dygyy2ftidkku"]
+[gd_scene load_steps=13 format=3 uid="uid://dygyy2ftidkku"]
 
-[ext_resource type="Script" uid="uid://bh0ycvdkmq3ux" path="res://Scripts/level2.gd" id="1_qhn73"]
+[ext_resource type="Script" uid="uid://bfejepw1uybtn" path="res://Scripts/encryption.gd" id="1_qhn73"]
 [ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="2_yvbv6"]
-[ext_resource type="Texture2D" uid="uid://cjtbgtqer7osx" path="res://tile/R.png" id="3_k5igv"]
-[ext_resource type="Texture2D" uid="uid://ct4hvtdxevnot" path="res://tile/391324.png" id="4_oe2de"]
+[ext_resource type="Texture2D" uid="uid://ccphg24cayicx" path="res://assets/Tileset/background.png" id="5_63bop"]
+[ext_resource type="Texture2D" uid="uid://b418dc80n0qht" path="res://assets/Tileset/input.png" id="6_4ybaa"]
+[ext_resource type="Texture2D" uid="uid://u7i5wcrqjqwc" path="res://assets/Character/reload.png" id="6_gxusl"]
+[ext_resource type="Texture2D" uid="uid://dmhk17gs1fx4r" path="res://assets/Character/h1.png" id="6_shjb1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvbv6"]
-bg_color = Color(0.056347445, 0.17056209, 0.09048296, 1)
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 6
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 6
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boo65"]
-bg_color = Color(0.14275816, 0, 0.009600752, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ybaa"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 3
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shjb1"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 10
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 10
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxusl"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 6
+border_width_bottom = 6
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhy63"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnp6f"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_qhn73")
 metadata/_edit_horizontal_guides_ = [505.0]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -92.0
-offset_top = -35.0
-offset_right = 1966.0
-offset_bottom = 1174.0
-color = Color(0, 0, 0, 1)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(961.5, 540)
+scale = Vector2(0.20031251, 0.2)
+texture = ExtResource("5_63bop")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
+offset_left = 3.0
 offset_top = 6.0
 offset_right = 1921.0
-offset_bottom = 1084.0
+offset_bottom = 1072.0
 
 [node name="LabelResets" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 1790.0
-offset_top = 928.0
-offset_right = 1830.0
-offset_bottom = 975.0
-theme_override_colors/font_color = Color(0.14117648, 0.53333336, 1, 1)
+offset_left = 1624.41
+offset_top = 896.0
+offset_right = 1664.41
+offset_bottom = 943.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_yvbv6")
 theme_override_font_sizes/font_size = 30
 text = "1"
@@ -46,11 +106,11 @@ vertical_alignment = 1
 
 [node name="LabelAttempts" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 1824.0
-offset_top = 924.0
-offset_right = 1885.0
-offset_bottom = 981.0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
+offset_left = 1667.0
+offset_top = 892.0
+offset_right = 1728.0
+offset_bottom = 949.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_yvbv6")
 theme_override_font_sizes/font_size = 30
 text = "2"
@@ -58,12 +118,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelTitle" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 330.0
-offset_top = 70.0
-offset_right = 1574.0
-offset_bottom = 162.0
-theme_override_colors/font_color = Color(5.631298e-06, 0.6659076, 5.7756904e-07, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -622.0
+offset_top = 139.3
+offset_right = 622.0
+offset_bottom = 231.30011
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.94756573, 0.94409895, 0.9365488, 1)
 theme_override_fonts/font = ExtResource("2_yvbv6")
 theme_override_font_sizes/font_size = 100
 text = "Crack the Folder Encryption"
@@ -71,12 +135,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelCipherName" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 627.0
-offset_top = 168.0
-offset_right = 1279.0
-offset_bottom = 229.0
-theme_override_colors/font_color = Color(0, 0.6666667, 0, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -326.0
+offset_top = 235.015
+offset_right = 325.99976
+offset_bottom = 296.01495
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.94509804, 0.94509804, 0.9372549, 1)
 theme_override_fonts/font = ExtResource("2_yvbv6")
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
@@ -84,11 +152,18 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="LabelCipher" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 612.0
-offset_top = 239.0
-offset_right = 1288.0
-offset_bottom = 276.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -338.0
+offset_top = -193.695
+offset_right = 338.0
+offset_bottom = -156.69482
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_yvbv6")
 theme_override_font_sizes/font_size = 40
 text = "Ciphertext: escape through the tunnel"
@@ -96,60 +171,88 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelKey" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 720.0
-offset_top = 309.0
-offset_right = 1163.0
-offset_bottom = 337.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -307.0
+offset_top = -146.60501
+offset_right = 307.0
+offset_bottom = -109.6048
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_yvbv6")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 text = "Key: 125346646631311545456454654"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="InputAnswer" type="LineEdit" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 781.0
-offset_top = 473.0
-offset_right = 1074.0
-offset_bottom = 523.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -146.5
+offset_top = 613.05
+offset_right = 146.5
+offset_bottom = 663.05
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0.6666667, 0, 1)
 theme_override_fonts/font = ExtResource("2_yvbv6")
 theme_override_font_sizes/font_size = 20
 placeholder_text = "TYPE THE DECRYPTED MESSAGE"
 
-[node name="R" type="Sprite2D" parent="CanvasLayer/Control"]
-position = Vector2(1855.0001, 924)
-scale = Vector2(0.015, 0.015)
-texture = ExtResource("3_k5igv")
-
-[node name="391324" type="Sprite2D" parent="CanvasLayer/Control"]
-position = Vector2(1807, 923)
-scale = Vector2(0.055, 0.055)
-texture = ExtResource("4_oe2de")
-
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 474.0
-offset_top = 570.0
-offset_right = 1382.0
-offset_bottom = 635.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -454.0
+offset_top = 700.0
+offset_right = 454.0
+offset_bottom = 765.00134
+grow_horizontal = 2
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="BtnSubmit" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.6666667, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0.6666667, 0, 1)
+theme_override_colors/font_color = Color(0.81868476, 0.8226785, 0.8390141, 1)
 theme_override_fonts/font = ExtResource("2_yvbv6")
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_yvbv6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4ybaa")
+theme_override_styles/hover = SubResource("StyleBoxFlat_shjb1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_shjb1")
+theme_override_styles/focus = SubResource("StyleBoxFlat_shjb1")
 text = "   Submit   "
 
 [node name="BtnReset" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.72994626, 0, 0.15458107, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_yvbv6")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_boo65")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gxusl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hhy63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cnp6f")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_cnp6f")
+theme_override_styles/focus = SubResource("StyleBoxFlat_cnp6f")
 text = "   Reset   "
+
+[node name="Input" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(958.5, 637)
+scale = Vector2(1.0433333, 1.0333333)
+texture = ExtResource("6_4ybaa")
+
+[node name="H1" type="Sprite2D" parent="."]
+position = Vector2(1696.0001, 893.00006)
+scale = Vector2(3, 3)
+texture = ExtResource("6_shjb1")
+
+[node name="Reload" type="Sprite2D" parent="."]
+position = Vector2(1646, 883.74)
+scale = Vector2(3, 3)
+texture = ExtResource("6_gxusl")
