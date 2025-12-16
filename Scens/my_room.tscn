@@ -614,6 +614,7 @@ layer_2/name = "Layer3"
 
 [node name="RoomComputer" type="Area2D" parent="."]
 position = Vector2(556, 284)
+collision_mask = 2
 script = ExtResource("10_yquvj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomComputer"]

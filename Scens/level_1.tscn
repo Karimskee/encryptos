@@ -599,6 +599,7 @@ zoom = Vector2(2.825, 2.825)
 
 [node name="strat_game" type="Area2D" parent="."]
 position = Vector2(705, 363)
+collision_mask = 2
 script = ExtResource("11_u5bo4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="strat_game"]
@@ -607,6 +608,7 @@ shape = SubResource("RectangleShape2D_40xyo")
 
 [node name="Traning" type="Area2D" parent="."]
 position = Vector2(209, 354)
+collision_mask = 2
 script = ExtResource("12_40xyo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Traning"]

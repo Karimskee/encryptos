@@ -224,6 +224,7 @@ size = Vector2(20, 22.672062)
 size = Vector2(27.238804, 21.119402)
 
 [node name="enemy_3" type="CharacterBody2D"]
+collision_layer = 4
 script = ExtResource("1_i1qwp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -241,6 +242,8 @@ shape = SubResource("RectangleShape2D_6qed0")
 target_position = Vector2(0, 31)
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]

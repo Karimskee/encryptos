@@ -518,11 +518,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Enemy" parent="." instance=ExtResource("11_44npc")]
 position = Vector2(316, 69)
-scale = Vector2(0.665, 0.665)
+scale = Vector2(0.8, 0.8)
 
 [node name="Enemy3" parent="." instance=ExtResource("11_44npc")]
 position = Vector2(650, 167)
-scale = Vector2(0.665, 0.665)
+scale = Vector2(0.8, 0.8)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 180.0
@@ -572,6 +572,7 @@ position = Vector2(301, 306)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(535, 188)
+collision_mask = 2
 script = ExtResource("10_3f6ob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -581,6 +582,7 @@ debug_color = Color(0.7029309, 0.49088812, 0, 0.41960785)
 
 [node name="Enemy-2" parent="." instance=ExtResource("12_x1vh1")]
 position = Vector2(233, 208)
+scale = Vector2(0.9, 0.9)
 
 [node name="enemy_3" parent="." instance=ExtResource("13_5kok1")]
 position = Vector2(471, 194)
