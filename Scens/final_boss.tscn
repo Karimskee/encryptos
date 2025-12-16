@@ -352,7 +352,7 @@ animations = [{
 size = Vector2(26, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u41es"]
-size = Vector2(49, 30)
+size = Vector2(101, 30)
 
 [node name="Final_boss" type="CharacterBody2D"]
 collision_layer = 4
@@ -375,6 +375,6 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(25, 9)
+position = Vector2(-0.5, 9)
 shape = SubResource("RectangleShape2D_u41es")
 debug_color = Color(0.9916094, 0, 0.26937523, 0.41960785)
