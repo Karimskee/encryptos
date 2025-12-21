@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ccnekru00m7oi"]
+[gd_scene load_steps=22 format=3 uid="uid://c0rivwobn2rq3"]
 
 [ext_resource type="PackedScene" uid="uid://csiad1xnelatm" path="res://Scens/player.tscn" id="1_xyqd1"]
 [ext_resource type="Texture2D" uid="uid://gnd76pyavpia" path="res://assets/Tileset/Tileset.png" id="2_rvnhs"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://fuasmlsgbiqe" path="res://assets/image.png" id="4_otu25"]
 [ext_resource type="Texture2D" uid="uid://bhfvxsmh27wqe" path="res://assets/Traps/Trap4.png" id="5_c5tun"]
 [ext_resource type="Script" uid="uid://bb0bjqkvvkiqa" path="res://Scripts/area_2d.gd" id="5_lq5ob"]
+[ext_resource type="PackedScene" uid="uid://y8waxelr72i8" path="res://Scens/tech_guy.tscn" id="6_lq5ob"]
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="6_qs7hl"]
 [ext_resource type="PackedScene" uid="uid://clg0hi0mrcxnb" path="res://Scens/health_ui.tscn" id="7_otu25"]
 [ext_resource type="PackedScene" uid="uid://yulrv74t667p" path="res://Scens/killzone.tscn" id="8_rvnhs"]
@@ -583,6 +584,10 @@ script = ExtResource("5_lq5ob")
 position = Vector2(-356.625, -150)
 shape = SubResource("RectangleShape2D_84duv")
 debug_color = Color(0.7029309, 0.49088812, 0, 0.41960785)
+
+[node name="TechGuy" parent="." instance=ExtResource("6_lq5ob")]
+position = Vector2(212, 555)
+scale = Vector2(0.52, 0.52)
 
 [node name="Player" parent="." instance=ExtResource("1_xyqd1")]
 position = Vector2(59, 554)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://rkltfjd04gmq"]
+[gd_scene load_steps=21 format=3 uid="uid://ccohe8n7itp3m"]
 
 [ext_resource type="PackedScene" uid="uid://sm7eppna178c" path="res://Scens/enemy.tscn" id="1_b2hy6"]
 [ext_resource type="Texture2D" uid="uid://fuasmlsgbiqe" path="res://assets/image.png" id="1_jjcoa"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="8_3cqr3"]
 [ext_resource type="PackedScene" uid="uid://clg0hi0mrcxnb" path="res://Scens/health_ui.tscn" id="9_iv6or"]
 [ext_resource type="PackedScene" uid="uid://yulrv74t667p" path="res://Scens/killzone.tscn" id="10_lan0v"]
+[ext_resource type="PackedScene" uid="uid://doomdrpbdkyqj" path="res://Scens/damage_buff_npc.tscn" id="13_yutgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jpjt2"]
 size = Vector2(25.25, 23)
@@ -565,6 +566,10 @@ scale = Vector2(0.9, 0.9)
 position = Vector2(1261, 429)
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("1_jjcoa")
+
+[node name="DamageBuffNPC" parent="." instance=ExtResource("13_yutgy")]
+position = Vector2(1171, 466)
+scale = Vector2(0.52, 0.52)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(1613, 573)
