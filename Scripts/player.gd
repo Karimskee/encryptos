@@ -195,7 +195,8 @@ func _physics_process(delta: float) -> void:
 			_start_dash()
 	
 	# --- Attack Input ---
-	if control_enabled and not is_attacking and not is_dashing and not is_blocking and Input.is_action_just_pressed("Attack"):
+	if control_enabled and not is_attacking and not is_dashing and not is_blocking and \
+	(Input.is_physical_key_pressed(KEY_F) or Input.is_physical_key_pressed(KEY_CTRL) or Input.is_action_pressed("Attack")):
 		_start_attack()
 	
 	var target_x := input_dir * speed
