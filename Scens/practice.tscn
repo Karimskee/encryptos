@@ -1,0 +1,261 @@
+[gd_scene load_steps=13 format=3 uid="uid://hdxxwu2sqd3"]
+
+[ext_resource type="Script" uid="uid://dbq77crtcf7nn" path="res://Scripts/practice.gd" id="1_poejl"]
+[ext_resource type="Texture2D" uid="uid://ccphg24cayicx" path="res://assets/Tileset/background.png" id="2_lmiu3"]
+[ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="3_21epw"]
+[ext_resource type="Texture2D" uid="uid://b418dc80n0qht" path="res://assets/Tileset/input.png" id="4_bwxhh"]
+[ext_resource type="Texture2D" uid="uid://dmhk17gs1fx4r" path="res://assets/Character/h1.png" id="5_gp0s3"]
+[ext_resource type="Texture2D" uid="uid://u7i5wcrqjqwc" path="res://assets/Character/reload.png" id="6_1x5ef"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvbv6"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 6
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 6
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ybaa"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 3
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shjb1"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 10
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 10
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxusl"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 6
+border_width_bottom = 6
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhy63"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnp6f"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_poejl")
+metadata/_edit_horizontal_guides_ = [505.0]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(961.5, 540)
+scale = Vector2(0.20031251, 0.2)
+texture = ExtResource("2_lmiu3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 6.0
+offset_right = 1921.0
+offset_bottom = 1072.0
+
+[node name="LabelResets" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 1624.41
+offset_top = 896.0
+offset_right = 1664.41
+offset_bottom = 943.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_21epw")
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelAttempts" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 1667.0
+offset_top = 892.0
+offset_right = 1728.0
+offset_bottom = 949.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_21epw")
+theme_override_font_sizes/font_size = 30
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelTitle" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -622.0
+offset_top = 139.3
+offset_right = 622.0
+offset_bottom = 231.30011
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.94756573, 0.94409895, 0.9365488, 1)
+theme_override_fonts/font = ExtResource("3_21epw")
+theme_override_font_sizes/font_size = 100
+text = "Crack the Folder Encryption"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelCipherName" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -326.0
+offset_top = 235.015
+offset_right = 325.99976
+offset_bottom = 296.01495
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.94509804, 0.94509804, 0.9372549, 1)
+theme_override_fonts/font = ExtResource("3_21epw")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LabelCipher" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -338.0
+offset_top = -193.695
+offset_right = 338.0
+offset_bottom = -156.69482
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_21epw")
+theme_override_font_sizes/font_size = 40
+text = "Ciphertext: escape through the tunnel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelKey" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -307.0
+offset_top = -101.13501
+offset_right = 306.9995
+offset_bottom = -64.134796
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_21epw")
+theme_override_font_sizes/font_size = 40
+text = "Key: 125346646631311545456454654"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="InputAnswer" type="LineEdit" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -146.5
+offset_top = -453.84998
+offset_right = 146.5
+offset_bottom = -403.84998
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0.6666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_21epw")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "TYPE THE DECRYPTED MESSAGE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -454.0
+offset_top = 700.0
+offset_right = 454.0
+offset_bottom = 765.00134
+grow_horizontal = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BtnSubmit" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.81868476, 0.8226785, 0.8390141, 1)
+theme_override_fonts/font = ExtResource("3_21epw")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_yvbv6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4ybaa")
+theme_override_styles/hover = SubResource("StyleBoxFlat_shjb1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_shjb1")
+theme_override_styles/focus = SubResource("StyleBoxFlat_shjb1")
+text = "   Submit   "
+
+[node name="BtnReset" type="Button" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_21epw")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_gxusl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hhy63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cnp6f")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_cnp6f")
+theme_override_styles/focus = SubResource("StyleBoxFlat_cnp6f")
+text = "   Reset   "
+
+[node name="Input" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(958.5, 637)
+scale = Vector2(1.0433333, 1.0333333)
+texture = ExtResource("4_bwxhh")
+
+[node name="H1" type="Sprite2D" parent="."]
+position = Vector2(1696.0001, 893.00006)
+scale = Vector2(3, 3)
+texture = ExtResource("5_gp0s3")
+
+[node name="Reload" type="Sprite2D" parent="."]
+position = Vector2(1646, 883.74)
+scale = Vector2(3, 3)
+texture = ExtResource("6_1x5ef")
