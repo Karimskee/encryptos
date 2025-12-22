@@ -535,7 +535,7 @@ offset_top = 127.0
 offset_right = 415.515
 offset_bottom = 150.0
 theme_override_fonts/font = ExtResource("1_iww0x")
-text = "<< Training"
+text = "<< Practice"
 
 [node name="Label2" type="Label" parent="."]
 offset_left = 451.0

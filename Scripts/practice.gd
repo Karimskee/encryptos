@@ -94,10 +94,8 @@ func _on_submit():
 	# مقارنة الإجابة (تجاهل حالة الأحرف)
 	if answer.to_lower() == plaintext_target.to_lower():
 		print("Correct Answer!")
-		#GameManager.next_level()
+
 		Transition.fade_out(func ():get_tree().change_scene_to_file("res://Scens/practice.tscn"))
-		#var next_scene = GameManager.get_next_scene_path()
-		#get_tree().change_scene_to_file(next_scene)
 		
 	else:
 		attempts_left -= 1
