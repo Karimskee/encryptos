@@ -209,7 +209,7 @@ func _physics_process(delta: float) -> void:
 			_flip(false)
 	
 	# --- Jump Input ---
-	if control_enabled and not is_attacking and not is_dashing and not is_blocking and Input.is_action_just_pressed("ui_accept"):
+	if control_enabled and not is_attacking and not is_dashing and not is_blocking and Input.is_action_pressed("ui_accept"):
 		jump_buffer_timer = jump_buffer_time
 	
 	if jump_buffer_timer > 0.0 and not is_attacking and not is_dashing and not is_blocking:
