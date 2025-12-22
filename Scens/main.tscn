@@ -1,22 +1,22 @@
-[gd_scene load_steps=22 format=3 uid="uid://eq3roeeihepq"]
+[gd_scene load_steps=23 format=3 uid="uid://eq3roeeihepq"]
 
-[ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="1_oanmv"]
-[ext_resource type="Texture2D" uid="uid://gnd76pyavpia" path="res://assets/Tileset/Tileset.png" id="2_8fnge"]
-[ext_resource type="Texture2D" uid="uid://c50imw3ldk5cn" path="res://assets/keys/pxkw_a.png" id="2_u5bo4"]
-[ext_resource type="PackedScene" uid="uid://csiad1xnelatm" path="res://Scens/player.tscn" id="2_wxgfh"]
-[ext_resource type="Texture2D" uid="uid://cyrvs4dglq1q2" path="res://assets/Tileset/Tileset_Borders.png" id="3_4j7iv"]
-[ext_resource type="Texture2D" uid="uid://72556q47ij4w" path="res://assets/keys/pxkw_d.png" id="3_40xyo"]
-[ext_resource type="Texture2D" uid="uid://bmudry4157rf5" path="res://assets/keys/pxkw_space_2.png" id="4_5uchn"]
-[ext_resource type="Texture2D" uid="uid://1lwm5r57wbin" path="res://assets/Traps/Trap5.png" id="4_en8a6"]
-[ext_resource type="Script" uid="uid://p6ap57wpbdo3" path="res://Scripts/ciphers/test_ciphers.gd" id="4_v7cy7"]
-[ext_resource type="Texture2D" uid="uid://bhfvxsmh27wqe" path="res://assets/Traps/Trap4.png" id="5_jk42d"]
-[ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="6_oanmv"]
-[ext_resource type="Script" uid="uid://dmypm1ibiskyr" path="res://Scripts/strat_game.gd" id="11_u5bo4"]
-[ext_resource type="Script" uid="uid://bna7lf5je2u6s" path="res://Scripts/traning.gd" id="12_40xyo"]
-[ext_resource type="PackedScene" uid="uid://clqale5qwhkbu" path="res://Scens/dialogue_box.tscn" id="14_qa7wf"]
+[ext_resource type="FontFile" uid="uid://0cviquefqtdl" path="res://Fonts/ThaleahFat.ttf" id="1_iww0x"]
+[ext_resource type="Texture2D" uid="uid://c50imw3ldk5cn" path="res://assets/keys/pxkw_a.png" id="2_l1uf7"]
+[ext_resource type="Texture2D" uid="uid://72556q47ij4w" path="res://assets/keys/pxkw_d.png" id="3_r10o7"]
+[ext_resource type="Texture2D" uid="uid://bmudry4157rf5" path="res://assets/keys/pxkw_space_2.png" id="4_v53rd"]
+[ext_resource type="PackedScene" uid="uid://csiad1xnelatm" path="res://Scens/player.tscn" id="5_u0ckp"]
+[ext_resource type="Texture2D" uid="uid://gnd76pyavpia" path="res://assets/Tileset/Tileset.png" id="6_x8add"]
+[ext_resource type="Texture2D" uid="uid://cyrvs4dglq1q2" path="res://assets/Tileset/Tileset_Borders.png" id="7_hrkha"]
+[ext_resource type="Texture2D" uid="uid://1lwm5r57wbin" path="res://assets/Traps/Trap5.png" id="8_0mf0x"]
+[ext_resource type="Texture2D" uid="uid://bhfvxsmh27wqe" path="res://assets/Traps/Trap4.png" id="9_4eu82"]
+[ext_resource type="Texture2D" uid="uid://d248eigua5ap8" path="res://assets/Tileset/Tileset_details.png" id="10_2hyny"]
+[ext_resource type="Script" uid="uid://dmypm1ibiskyr" path="res://Scripts/strat_game.gd" id="11_7p8ms"]
+[ext_resource type="Script" uid="uid://bna7lf5je2u6s" path="res://Scripts/traning.gd" id="12_kvgiw"]
+[ext_resource type="PackedScene" uid="uid://clqale5qwhkbu" path="res://Scens/dialogue_box.tscn" id="13_268ib"]
+[ext_resource type="Script" uid="uid://p6ap57wpbdo3" path="res://Scripts/ciphers/ciphers.gd" id="14_e4am7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5uchn"]
-texture = ExtResource("2_8fnge")
+texture = ExtResource("6_x8add")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -186,7 +186,7 @@ texture = ExtResource("2_8fnge")
 8:13/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70k3q"]
-texture = ExtResource("3_4j7iv")
+texture = ExtResource("7_hrkha")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -305,10 +305,10 @@ texture = ExtResource("3_4j7iv")
 8:12/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qa7wf"]
-texture = ExtResource("4_en8a6")
+texture = ExtResource("8_0mf0x")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t0upt"]
-texture = ExtResource("5_jk42d")
+texture = ExtResource("9_4eu82")
 1:0/0 = 0
 2:0/0 = 0
 5:0/0 = 0
@@ -371,7 +371,7 @@ texture = ExtResource("5_jk42d")
 23:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k3gst"]
-texture = ExtResource("6_oanmv")
+texture = ExtResource("10_2hyny")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -526,7 +526,7 @@ offset_left = 540.065
 offset_top = 127.0
 offset_right = 628.065
 offset_bottom = 150.0
-theme_override_fonts/font = ExtResource("1_oanmv")
+theme_override_fonts/font = ExtResource("1_iww0x")
 text = "sTART gAME >>"
 
 [node name="Label4" type="Label" parent="."]
@@ -534,15 +534,15 @@ offset_left = 328.71002
 offset_top = 127.0
 offset_right = 415.515
 offset_bottom = 150.0
-theme_override_fonts/font = ExtResource("1_oanmv")
-text = "<< Training"
+theme_override_fonts/font = ExtResource("1_iww0x")
+text = "<< Practice"
 
 [node name="Label2" type="Label" parent="."]
 offset_left = 451.0
 offset_top = 114.0
 offset_right = 491.0
 offset_bottom = 137.0
-theme_override_fonts/font = ExtResource("1_oanmv")
+theme_override_fonts/font = ExtResource("1_iww0x")
 text = "JUMP"
 
 [node name="Label3" type="Label" parent="."]
@@ -550,7 +550,7 @@ offset_left = 477.0
 offset_top = 82.0
 offset_right = 517.0
 offset_bottom = 105.0
-theme_override_fonts/font = ExtResource("1_oanmv")
+theme_override_fonts/font = ExtResource("1_iww0x")
 text = "Right"
 
 [node name="Label" type="Label" parent="."]
@@ -558,22 +558,22 @@ offset_left = 428.0
 offset_top = 82.0
 offset_right = 468.0
 offset_bottom = 105.0
-theme_override_fonts/font = ExtResource("1_oanmv")
+theme_override_fonts/font = ExtResource("1_iww0x")
 text = "Left"
 
 [node name="PxkwA" type="Sprite2D" parent="."]
 position = Vector2(444, 104)
-texture = ExtResource("2_u5bo4")
+texture = ExtResource("2_l1uf7")
 
 [node name="PxkwD" type="Sprite2D" parent="."]
 position = Vector2(492.28, 104)
-texture = ExtResource("3_40xyo")
+texture = ExtResource("3_r10o7")
 
 [node name="PxkwSpace2" type="Sprite2D" parent="."]
 position = Vector2(467.08, 136)
-texture = ExtResource("4_5uchn")
+texture = ExtResource("4_v53rd")
 
-[node name="Player" parent="." instance=ExtResource("2_wxgfh")]
+[node name="Player" parent="." instance=ExtResource("5_u0ckp")]
 position = Vector2(464, 161)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -600,25 +600,25 @@ zoom = Vector2(2.825, 2.825)
 [node name="strat_game" type="Area2D" parent="."]
 position = Vector2(705, 363)
 collision_mask = 2
-script = ExtResource("11_u5bo4")
+script = ExtResource("11_7p8ms")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="strat_game"]
 position = Vector2(6, -8.5)
 shape = SubResource("RectangleShape2D_40xyo")
 
-[node name="Traning" type="Area2D" parent="."]
+[node name="Practice" type="Area2D" parent="."]
 position = Vector2(209, 354)
 collision_mask = 2
-script = ExtResource("12_40xyo")
+script = ExtResource("12_kvgiw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Traning"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Practice"]
 position = Vector2(7, -3.5)
 shape = SubResource("RectangleShape2D_5uchn")
 
-[node name="DialogueBox" parent="." instance=ExtResource("14_qa7wf")]
+[node name="DialogueBox" parent="." instance=ExtResource("13_268ib")]
 
 [node name="Ciphers" type="Node" parent="."]
-script = ExtResource("4_v7cy7")
+script = ExtResource("14_e4am7")
 
 [connection signal="body_entered" from="strat_game" to="strat_game" method="_on_body_entered"]
-[connection signal="body_entered" from="Traning" to="Traning" method="_on_body_entered"]
+[connection signal="body_entered" from="Practice" to="Practice" method="_on_body_entered"]

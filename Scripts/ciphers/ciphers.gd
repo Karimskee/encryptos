@@ -1,7 +1,18 @@
+class_name Ciphers
 extends Node
 
 
 # Global variables
+static var ciphers_list = [
+		Caesar,
+		Monoalphabetic,
+		OneTimePad,
+		Polyalphabetic,
+		RailFence,
+		RowColumnTransposition,
+		Playfair,
+		Hill,
+	]
 
 ## some plain texts to use
 ## "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 1234567890 !@#$%^&*()_+-=~,./;:'\"[]{}<>"
@@ -21,20 +32,8 @@ func _ready():
 	"""
 	print(">>> [TESTING CIPHERS] <<<\n")
 	
-	# Cipher classes
-	var ciphers = [
-		Caesar,
-		Monoalphabetic,
-		OneTimePad,
-		Polyalphabetic,
-		RailFence,
-		RowColumnTransposition,
-		Playfair,
-		Hill,
-	]
-	
 	# For each cipher
-	for cipher in ciphers:
+	for cipher in ciphers_list:
 		test(cipher)
 
 
