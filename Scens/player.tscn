@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cr5mpq3c5f0cf" path="res://Scripts/player.gd" id="1_4tq17"]
 [ext_resource type="Texture2D" uid="uid://bfgbnm0nuorcj" path="res://assets/Character/Adventure_Character_Simple.png" id="2_y1jf2"]
-[ext_resource type="AudioStream" uid="uid://dfeibtfon40c7" path="res://assets/sounds/sword-sound-260274.mp3" id="4_nw0oj"]
-[ext_resource type="AudioStream" uid="uid://bkp5p8kmlihbi" path="res://assets/sounds/slap-hurt-pain-sound-effect-262618.mp3" id="5_inxhq"]
-[ext_resource type="AudioStream" uid="uid://cm4tqwy11bvkn" path="res://assets/sounds/mario-death-sound-effect-hd-1080-publer.io.mp3" id="6_inxhq"]
-[ext_resource type="AudioStream" uid="uid://cic0faiaf8dlt" path="res://assets/sounds/blox-fruits-dash-sound-effect-1080-publer.io.mp3" id="7_ft64u"]
+[ext_resource type="AudioStream" uid="uid://dfeibtfon40c7" path="res://assets/sounds/sword-attack-sound.mp3" id="4_nw0oj"]
+[ext_resource type="AudioStream" uid="uid://bkp5p8kmlihbi" path="res://assets/sounds/slap-hurt-sound.mp3" id="5_inxhq"]
+[ext_resource type="AudioStream" uid="uid://cm4tqwy11bvkn" path="res://assets/sounds/mario-death-sound.mp3" id="6_inxhq"]
+[ext_resource type="AudioStream" uid="uid://cic0faiaf8dlt" path="res://assets/sounds/blox-fruits-dash-sound.mp3" id="7_ft64u"]
 [ext_resource type="Texture2D" uid="uid://gnqmxh2c0rsp" path="res://assets/Smoke FX Lite Zip 5.25.23/SmokeFX Lite SpriteSheet 2A-1.png" id="8_ft64u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_or86s"]
