@@ -43,7 +43,6 @@ var is_blocking: bool = false
 @onready var attack_area: Area2D = $AttackArea
 
 # Audio Nodes
-@onready var sfx_run: AudioStreamPlayer2D = $Audio/Run
 @onready var sfx_attack: AudioStreamPlayer2D = $Audio/Attack
 @onready var sfx_hurt: AudioStreamPlayer2D = $Audio/Hurt
 @onready var sfx_dash: AudioStreamPlayer2D = $Audio/Dash
@@ -123,8 +122,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	if is_dead:
-		if sfx_run and sfx_run.playing:
-			sfx_run.stop()
 		return
 	
 	# --- Block Logic ---
@@ -225,16 +222,6 @@ func _physics_process(delta: float) -> void:
 			jump_buffer_timer = 0.0
 	
 	move_and_slide()
-	
-	# --- Sound Logic ---
-	var is_moving = abs(velocity.x) > 10.0
-	if sfx_run:
-		if is_on_floor() and is_moving and not is_dashing and not is_attacking and not is_blocking:
-			if not sfx_run.playing:
-				sfx_run.play()
-		else:
-			if sfx_run.playing:
-				sfx_run.stop()
 	
 	_update_animation()
 
