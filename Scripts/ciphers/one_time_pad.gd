@@ -1,7 +1,7 @@
 class_name OneTimePad
 extends Node
 
-# 🔒 ENCRYPTION
+# ENCRYPTION
 # Logic: (PlainChar + KeyChar) % 26
 # This OneTimePad approach ghosts the non alphabetic PlainChars' KeyChars
 # Online OneTimePad approaches ignores the non alphabetic PlainChars, passing
@@ -31,7 +31,7 @@ static func encrypt(key: String, text: String) -> String:
 			
 	return buffer.get_string_from_utf8()
 
-# 🔓 DECRYPTION
+# DECRYPTION
 # Logic: (CipherChar - KeyChar) % 26
 static func decrypt(key: String, text: String) -> String:
 	var buffer: PackedByteArray = text.to_utf8_buffer()

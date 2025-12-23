@@ -1,7 +1,7 @@
 class_name Playfair
 extends Node
 
-# 🔒 ENCRYPTION
+# ENCRYPTION
 static func encrypt(key: String, text: String) -> String:
 	var matrix = _generate_matrix(key)
 	var pairs = _prepare_text(text) # Handles "LL" -> "LX", etc.
@@ -40,7 +40,7 @@ static func encrypt(key: String, text: String) -> String:
 		
 	return result
 
-# 🔓 DECRYPTION
+# DECRYPTION
 static func decrypt(key: String, text: String) -> String:
 	var matrix = _generate_matrix(key)
 	
@@ -90,7 +90,7 @@ static func decrypt(key: String, text: String) -> String:
 		
 	return result
 
-# 🛠 HELPER: Generate 5x5 Matrix (Merges I/J)
+# HELPER: Generate 5x5 Matrix (Merges I/J)
 static func _generate_matrix(key: String) -> Array:
 	# Standard Playfair Alphabet (No J)
 	var alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ" 
@@ -121,7 +121,7 @@ static func _generate_matrix(key: String) -> Array:
 			
 	return matrix
 
-# 🛠 HELPER: Prepare Text (Pairs, Padding, Duplicates)
+# HELPER: Prepare Text (Pairs, Padding, Duplicates)
 static func _prepare_text(text: String) -> Array:
 	var clean = ""
 	# Remove non-alpha, swap J->I
