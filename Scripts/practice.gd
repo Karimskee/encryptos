@@ -15,6 +15,40 @@ var current_key: Variant
 var ciphertext: String
 var plaintext_target: String = "" 
 
+var plaintexts_list = [
+	"DAVID",
+	"KARIMSKEE",
+	"ZAUZUO",
+	"CAT",
+	"DUCK",
+	"ALGORITHM",
+	"BINARY",
+	"CIPHER",
+	"DECRYPT",
+	"ENCRYPT",
+	"FIREWALL",
+	"GLITCH",
+	"HACKER",
+	"INTERNET",
+	"JAVA",
+	"KERNEL",
+	"LOGIC",
+	"MATRIX",
+	"NETWORK",
+	"OFFSET",
+	"PROTOCOL",
+	"QUANTUM",
+	"ROUTER",
+	"SECURITY",
+	"TOGGLE",
+	"UPLOAD",
+	"VECTOR",
+	"WIZARD",
+	"XENON",
+	"YIELD",
+	"ZIGZAG",
+]
+
 func _ready():
 	randomize()
 	
@@ -35,7 +69,7 @@ func _ready():
 
 func _start_new_round():
 	attempts_left = max_attempts
-	plaintext_target = current_level_config["text"]
+	plaintext_target = plaintexts_list[randi() % plaintexts_list.size()]
 	
 	print(">>> Level:", GameManager.current_level, " | Text:", plaintext_target)
 	
